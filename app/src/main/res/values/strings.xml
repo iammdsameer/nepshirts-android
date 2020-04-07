@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">nepshirts-android</string>
+    <string name="email">Email</string>
+    <string name="nepshirts_gmail_com">nepshirts@gmail.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">********</string>
 </resources>
