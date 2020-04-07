@@ -32,7 +32,6 @@
         android:layout_below="@id/login_logo"
         android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
-
         android:text="@string/email"
 
         />
@@ -53,7 +52,6 @@
         android:layout_below="@id/email_input"
         android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
-
         android:text="@string/password"
 
 
@@ -66,7 +64,6 @@
         android:layout_height="20dp"
         android:layout_marginStart="50dp"
         android:hint="@string/password_hint"
-
         />
 
     <ImageView
