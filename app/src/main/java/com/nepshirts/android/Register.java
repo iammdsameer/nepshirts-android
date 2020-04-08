@@ -21,13 +21,18 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
        Firebase.setAndroidContext(this);// I am testing firebase database here
+        // connecting to database
         testref = new Firebase("https://nepshirts-d5435.firebaseio.com/");
+
         test =(Button) findViewById(R.id.reg_button);// I am testing firebase database here
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Firebase testrefChild = testref.child("Name");
+                //sends value to  Name child
                 testrefChild.setValue("Anil is Testing");
+
             }
         });
 
