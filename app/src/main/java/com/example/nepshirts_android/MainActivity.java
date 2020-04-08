@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public void register_page(View view) {
         Intent myIntent = new Intent(MainActivity.this, Register.class);
         startActivity(myIntent);
+        finish();
     }
 
 
