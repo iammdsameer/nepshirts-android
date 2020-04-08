@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "799419866079",
+    "firebase_url": "https://nepshirts-d5435.firebaseio.com",
+    "project_id": "nepshirts-d5435",
+    "storage_bucket": "nepshirts-d5435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799419866079:android:bb0b0862312bf72ca9c26a",
+        "android_client_info": {
+          "package_name": "com.nepshirts.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799419866079-vsa1ei4to74bfnst40ic9atg5mfn9sol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nepshirts.android",
+            "certificate_hash": "e4a80fb25633bf27c3a76abd2975f706838e2c8c"
+          }
+        },
+        {
+          "client_id": "799419866079-pfs32kkrs45bfhr8e6416c29pfov0r7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSgQGgxDHw6oPWweZ1yVNnuPTWGwEvzcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799419866079-pfs32kkrs45bfhr8e6416c29pfov0r7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
