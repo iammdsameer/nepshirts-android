@@ -1,4 +1,4 @@
-package com.example.nepshirts_android;
+package com.nepshirts.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 

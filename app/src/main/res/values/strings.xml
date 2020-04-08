@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">nepshirts-android</string>
+    <string name="app_name">Nepshirts</string>
     <string name="email">Email</string>
     <string name="emailplaceholder">nepshirts@gmail.com</string>
     <string name="password">Password</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nepshirts_android">
+    package="com.nepshirts.android">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Register"></activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.nepshirts.android.MainActivity"></activity>
+        <activity android:name="com.nepshirts.android.Register"></activity>
+        <activity android:name="com.nepshirts.android.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
