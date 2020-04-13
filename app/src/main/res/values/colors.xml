@@ -6,8 +6,8 @@
     <color name="red">#FF5555</color>
     <color name="blue">#6C79D5</color>
     <color name="green">#10C68A</color>
-    <color name="lightGreen">#5AD8AE</color>
     <color name="lightBlue">#5DBCD2</color>
+    <color name="lightGreen">#5AD8AE</color>
     <color name="darkGrey">#707070</color>
     <color name="lightGrey">#D2D2D2</color>
     <color name="black">#000000</color>
