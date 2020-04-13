@@ -4,7 +4,7 @@
     <string name="emailplaceholder">nepshirts@gmail.com</string>
     <string name="password">Password</string>
     <string name="passwordplaceholder">********</string>
-    <string name="forgot_password_label">Forgot Password</string>
+    <string name="forgot_password_label">Forgot Password?</string>
     <string name="register_label">Register</string>
     <string name="login_label">Login</string>
     <string name="name">Full Name</string>
