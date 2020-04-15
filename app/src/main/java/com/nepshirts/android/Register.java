@@ -1,40 +1,89 @@
 package com.nepshirts.android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Register extends AppCompatActivity {
 
 
-    private Button  test;// I am testing firebase database here
-    private Firebase testref;
+    private Button reg_btn;
+    private EditText uname, uemail, uphone, ubirthday, ugender, upassword1, upassword2;
+    FirebaseAuth userRegister;
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        userRegister = FirebaseAuth.getInstance();
 
-       Firebase.setAndroidContext(this);// I am testing firebase database here
-        // connecting to database
-        testref = new Firebase("https://nepshirts-d5435.firebaseio.com/");
+        uemail = findViewById(R.id.email);
 
-        test =(Button) findViewById(R.id.reg_button);// I am testing firebase database here
-        test.setOnClickListener(new View.OnClickListener() {
+        upassword1 = findViewById(R.id.password1);
+        upassword2 = findViewById(R.id.password2);
+        reg_btn = findViewById(R.id.reg_button);
+        reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Firebase testrefChild = testref.child("Name");
-                //sends value to  Name child
-                testrefChild.setValue("Anil is Testing");
+                String email = uemail.getText().toString();
+
+                String password1 = upassword1.getText().toString();
+                String password2 = upassword2.getText().toString();
+
+
+                if (email.isEmpty()) {
+                    uemail.setError("Email cannot be empty");
+                    uemail.requestFocus();
+                } else if (password1.isEmpty()) {
+                    upassword1.setError("Password cannot be empty");
+                    upassword1.setError("Password cannot be empty");
+                    upassword1.requestFocus();
+                }
+                    else if (password1 == password2) {
+                        upassword2.setError("Password does not match");
+                        upassword2.requestFocus();
+                    }
+                 else {
+                    userRegister.createUserWithEmailAndPassword(email, password2)
+                            .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+
+                                        startActivity(new Intent(Register.this, home.class));
+
+                                    } else {
+                                        Toast.makeText(Register.this, "Something went wrong!!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+
+                            });
+                }
+
 
             }
         });
+
 
     }
 

@@ -13,4 +13,9 @@
     <string name="birthday">birthday</string>
     <string name="password1">Password</string>
     <string name="password2">Confirm Password</string>
+
+    <!--    google firebase-->
+    <string name="nepshirts">Firebase Google Login</string>
+    <string name="web_client_id">799419866079-pfs32kkrs45bfhr8e6416c29pfov0r7i.apps.googleusercontent.com</string>
+
 </resources>
