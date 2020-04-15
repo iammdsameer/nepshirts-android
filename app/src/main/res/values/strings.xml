@@ -9,8 +9,8 @@
     <string name="login_label">Login</string>
     <string name="name">Full Name</string>
     <string name="phone">Phone(+977)</string>
-    <string name="gender">gender</string>
-    <string name="birthday">birthday</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
     <string name="password1">Password</string>
     <string name="password2">Confirm Password</string>
 
