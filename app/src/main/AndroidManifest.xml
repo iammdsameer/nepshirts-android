@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateVisible|adjustPan"
 
         >
-        <activity android:name=".home"></activity>
+        <activity android:name=".home" />
         <activity android:name=".MainActivity"
 
-            android:windowSoftInputMode="stateVisible|adjustPan"
+
             />
         <activity android:name=".Register" />
         <activity android:name=".SplashScreen">
-            <intent-filter>x
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -18,12 +18,15 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fauth = FirebaseAuth.getInstance();
-        String f_string = fauth.getCurrentUser().getEmail();
+
 
 
         setContentView(R.layout.activity_home);
         email= findViewById(R.id.show_email);
-        email.setText("HI " + f_string + "Welcome to NepShirts!!");
+        email.setText("Welcome !!");
+
+
+
     }
     public void home_page(View view) {
         Intent myIntent = new Intent(home.this, MainActivity.class);
