@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:context=".UserProfile"
+    android:layout_height="wrap_content"
+    >
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/t1"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#e8e4e3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="150sp"
+        android:layout_marginTop="50sp"
+        />
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_below="@id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anil Poudyal"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="35sp"
+        android:textSize="20sp"
+
+
+        android:layout_marginStart="155sp"
+        />
+    <TextView
+        android:id="@+id/email_label_profile"
+        android:layout_below="@id/user_name"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    android:layout_marginTop="60sp"
+        android:text="Email: "
+/>
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_label_profile"
+        android:layout_marginStart="60sp"
+        android:hint="anilrunjakote@gmail.com"
+        />
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_below="@id/userEmail"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Phone: "
+        />
+    <EditText
+        android:id="@+id/userPhone"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_phone"
+        android:layout_marginStart="60sp"
+        android:hint="+977-123456890"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_below="@id/userPhone"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="First Name: "
+        />
+    <EditText
+        android:id="@+id/firtName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_name"
+        android:layout_marginStart="60sp"
+        android:hint="Anil"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:id="@+id/last_name"
+        android:layout_below="@id/firtName"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Last Name: "
+        />
+    <EditText
+        android:id="@+id/lastName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/last_name"
+        android:layout_marginStart="60sp"
+        android:hint="Poudyal"
+        android:inputType="number"
+        />
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_below="@id/lastName"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="City:  "
+        />
+    <EditText
+        android:id="@+id/cityName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/city_name"
+        android:layout_marginStart="60sp"
+        android:hint="Kathmandu"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:id="@+id/street_name"
+        android:layout_below="@id/cityName"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Street:  "
+        />
+    <EditText
+        android:id="@+id/streetName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/street_name"
+        android:layout_marginStart="60sp"
+        android:hint="Bafal Ring Road"
+        android:inputType="text"
+        />
+    <TextView
+        android:id="@+id/landmark_name"
+        android:layout_below="@id/streetName"
+        android:layout_marginStart="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="Landmark:  "
+        />
+    <EditText
+        android:id="@+id/landmarkName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/landmark_name"
+        android:layout_marginStart="60sp"
+        android:hint="Near Everest Bank"
+        android:inputType="text"
+        />
+    <Button
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
+        android:text="Update Profile"
+        android:textColor="#fff"
+        android:layout_marginTop="20sp"
+        android:layout_below="@id/landmarkName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50sp"
+        />
+
+
+</RelativeLayout>
+</ScrollView>

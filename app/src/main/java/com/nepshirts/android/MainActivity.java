@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         else{
 
                             Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, Home.class));
+                            startActivity(new Intent(MainActivity.this, UserProfile.class));
                         }
                     }
                 });
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("ERROR: ", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(MainActivity.this, "Login Success!!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, Home.class));
+                            startActivity(new Intent(MainActivity.this, UserProfile.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("ERROR: ", "signInWithCredential:failure", task.getException());

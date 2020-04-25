@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/logo_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="stateVisible|adjustPan"
-        >
+        android:windowSoftInputMode="stateVisible|adjustPan">
+        <activity android:name=".UserProfile"></activity>
         <activity android:name=".Home" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
