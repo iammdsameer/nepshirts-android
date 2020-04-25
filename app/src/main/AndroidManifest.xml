@@ -12,13 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustPan"
-
         >
-        <activity android:name=".home" />
-        <activity android:name=".MainActivity"
-
-
-            />
+        <activity android:name=".Home" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".SplashScreen">
             <intent-filter>

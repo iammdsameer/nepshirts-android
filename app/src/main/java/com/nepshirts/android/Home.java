@@ -12,7 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class home extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     private TextView email;
     private FirebaseAuth fauth;
@@ -58,7 +58,7 @@ public class home extends AppCompatActivity {
 
     }
     public void home_page(View view) {
-        Intent myIntent = new Intent(home.this, MainActivity.class);
+        Intent myIntent = new Intent(Home.this, MainActivity.class);
         startActivity(myIntent);
         finish();
     }
