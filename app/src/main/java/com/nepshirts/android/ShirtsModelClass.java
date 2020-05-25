@@ -5,14 +5,14 @@ public class ShirtsModelClass {
     private String shirtName;
     private String shirtPrice;
     private String shirtCategory;
-    private int shirtRating;
+//    private int shirtRating;
 
-    public ShirtsModelClass(int shirtImage, String shirtName, String shirtPrice, String shirtCategory, int shirtRating) {
+    public ShirtsModelClass(int shirtImage, String shirtName, String shirtPrice, String shirtCategory) { //, int shirtRating
         this.shirtImage = shirtImage;
         this.shirtName = shirtName;
         this.shirtPrice = shirtPrice;
         this.shirtCategory=shirtCategory;
-        this.shirtRating = shirtRating;
+//        this.shirtRating = shirtRating;
     }
 
     public int getShirtImage() {
@@ -31,7 +31,7 @@ public class ShirtsModelClass {
         return shirtCategory;
     }
 
-    public int getShirtRating() {
-        return shirtRating;
-    }
+//    public int getShirtRating() {
+//        return shirtRating;
+//    }
 }

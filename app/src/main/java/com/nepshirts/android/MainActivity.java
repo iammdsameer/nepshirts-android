@@ -36,7 +36,22 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener isauthenticated;
     private static int RC_SIGN_IN = 0;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        isauthenticated = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() !=null){
+
+                    startActivity(new Intent(MainActivity.this, SingleCategory.class));
+                }
+
+            }
+        };
+        mAuth.addAuthStateListener(isauthenticated);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,16 +98,6 @@ public class MainActivity extends AppCompatActivity {
                     password.requestFocus();
                 }
 
-                isauthenticated = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        if(firebaseAuth.getCurrentUser() !=null){
-
-                            startActivity(new Intent(MainActivity.this, Home.class));
-                        }
-
-                    }
-                };
                 mAuth.signInWithEmailAndPassword(uemail,upassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         else{
 
                             Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, UserProfile.class));
+                            startActivity(new Intent(MainActivity.this, RecyclerViewAdapter.class));
                         }
                     }
                 });

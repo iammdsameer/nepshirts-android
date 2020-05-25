@@ -20,9 +20,9 @@ public class SingleCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_category);
 
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test","test", "test", 4));
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test","test", "test", 4));
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test","test", "test", 4));
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test2","test", "test")); //rating todo
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "haha","342", "old"));
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "lol","342", "test"));
 
         initRecyclerView();
     }
