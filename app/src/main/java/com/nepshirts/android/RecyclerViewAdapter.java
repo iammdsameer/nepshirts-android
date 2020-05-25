@@ -1,11 +1,13 @@
 package com.nepshirts.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +21,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG= "RecyclerViewAdapter";
 
     private List<ShirtsModelClass> modelClassList;
+    private Context mContext;
 
-    public RecyclerViewAdapter(List<ShirtsModelClass> modelClassList){
+    public RecyclerViewAdapter(List<ShirtsModelClass> modelClassList, Context mContext){
         this.modelClassList = modelClassList;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -33,21 +37,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int position) {
         int img = modelClassList.get(position).getShirtImage();
-        String name = modelClassList.get(position).getShirtName();
+        final String name = modelClassList.get(position).getShirtName();
         String price = modelClassList.get(position).getShirtPrice();
         String category = modelClassList.get(position).getShirtCategory();
-//        int rating = modelClassList.get(position).getShirtRating();
-        holder.setData(img, name, price, category); //,rating
+        int rating = (int) modelClassList.get(position).getShirtRating();
+        holder.setData(img, name, price, category, rating); //,rating
 
-//        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText()
-//            }
-//        });
+        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,SingleProduct.class);
+                intent.putExtra("Image",modelClassList.get(position).getShirtImage());
+                intent.putExtra("Name",modelClassList.get(position).getShirtName());
+                intent.putExtra("Price",modelClassList.get(position).getShirtPrice());
+                intent.putExtra("Category",modelClassList.get(position).getShirtCategory());
+                intent.putExtra("Rating",modelClassList.get(position).getShirtRating());
+
+                mContext.startActivity(intent);
+
+
+            }
+        });
     }
 
     @Override
@@ -56,31 +70,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-         ImageView shirtImage;
+        private ImageView shirtImage;
         private TextView shirtName;
         private TextView shirtPrice;
         private TextView shirtCategory;
-//        private TextView shirtRating;
-//        private LinearLayout parentLayout;
+        private RatingBar shirtRating;
+        private LinearLayout parentLayout;
 
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            shirtImage = itemView.findViewById(R.id.shirt_image);
-            shirtName = itemView.findViewById(R.id.shirt_name);
-            shirtPrice = itemView.findViewById(R.id.shirt_price);
-            shirtCategory = itemView.findViewById(R.id.shirt_category);
-//            shirtRating = itemView.findViewById(R.id.shirt_rating);
-//            parentLayout = itemView.findViewById(R.id.parent_layout);
+        public ViewHolder(@NonNull View View) {
+            super(View);
+            shirtImage = View.findViewById(R.id.shirt_image);
+            shirtName = View.findViewById(R.id.shirt_name);
+            shirtPrice = View.findViewById(R.id.shirt_price);
+            shirtCategory = View.findViewById(R.id.shirt_category);
+            shirtRating = View.findViewById(R.id.shirt_rating);
+            parentLayout = View.findViewById(R.id.parent_layout);
 
         }
 
-        public void setData(int image, String name, String price, String category) { //, int rating
+        public void setData(int image, String name, String price, String category, float rating) { //, int rating
             shirtImage.setImageResource(image);
             shirtName.setText(name);
             shirtPrice.setText(price);
             shirtCategory.setText(category);
-//            shirtRating.setRawInputType(rating);
+            shirtRating.setRating(rating);
         }
     }
 }

@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static int TIMEOUT = 3000;
+    private static int TIMEOUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

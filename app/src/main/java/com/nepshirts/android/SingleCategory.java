@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +21,10 @@ public class SingleCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_category);
 
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test2","test", "test")); //rating todo
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "haha","342", "old"));
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "lol","342", "test"));
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4)); //rating todo
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "getLaugh()","Rs. 500", "Humour", 5));
+        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test","Free", "haha", 5));
 
         initRecyclerView();
     }
@@ -31,9 +33,9 @@ public class SingleCategory extends AppCompatActivity {
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(modelClassList);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(modelClassList, this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
     }
 }

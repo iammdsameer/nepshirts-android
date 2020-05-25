@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/shirt_image"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:scaleType="centerCrop"
@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/shirt_image"
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
@@ -71,16 +71,32 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/shirt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="55dp"
-                    android:text="Code \nby Nepshirts"
+                    android:text="Code"
                     android:textColor="#000"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:id="@+id/shirt_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textSize="16sp"
+                    />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,12 +109,12 @@
                         android:gravity="right"
                         android:text="-30 off"
                         android:textColor="#FF3F3F"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/shirt_price"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
                         android:gravity="right"
                         android:text="रु 500"
                         android:textColor="#000"
@@ -111,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 android:text="available sizes"
                 android:textAllCaps="true"
                 android:textSize="18sp" />
