@@ -127,7 +127,9 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:text="Register" />
+        android:text="Register"
+
+        />
 
     <TextView
         android:id="@+id/register_view"

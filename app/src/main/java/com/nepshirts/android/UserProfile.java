@@ -49,10 +49,11 @@ public class UserProfile extends AppCompatActivity {
             //setting to views
             Picasso.get().load(personPhoto).into(profileImage);
             userName.setText(personName);
-            email.setHint(personEmail);
-            fname.setHint(personGivenName);
-            lname.setHint(personFamilyName);
-            phone.setHint(personId);
+            email.setText(personEmail);
+            fname.setText(personGivenName);
+            lname.setText(personFamilyName);
+            phone.setText(personId);
+
         }
 
 
