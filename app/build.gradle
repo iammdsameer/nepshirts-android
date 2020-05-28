@@ -48,5 +48,11 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+    //like button dependency
+    compile 'com.github.jd-alexander:LikeButton:0.2.3'
+    //material design dependency
+    implementation 'com.google.android.material:material:1.1.0'
+
+
 }
 apply plugin: 'com.google.gms.google-services'
