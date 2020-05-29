@@ -34,9 +34,15 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="35sp"
         android:textSize="20sp"
-
-
         android:layout_marginStart="155sp"
+        />
+    <Button
+        android:layout_below="@+id/user_name"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:onClick="logout"
         />
     <TextView
         android:id="@+id/email_label_profile"
@@ -53,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/email_label_profile"
         android:layout_marginStart="60sp"
-        android:hint="anilrunjakote@gmail.com"
+        android:hint="youremail@gmail.com"
         />
     <TextView
         android:id="@+id/user_phone"
