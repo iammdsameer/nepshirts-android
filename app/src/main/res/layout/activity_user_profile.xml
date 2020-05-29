@@ -30,7 +30,7 @@
         android:layout_below="@id/profile_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anil Poudyal"
+        android:text=""
         android:layout_centerInParent="true"
         android:layout_marginTop="35sp"
         android:textSize="20sp"
@@ -87,39 +87,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
-        android:text="First Name: "
+        android:text="Full Name: "
         />
     <EditText
-        android:id="@+id/firtName"
+        android:id="@+id/firstName"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_below="@id/first_name"
         android:layout_marginStart="60sp"
-        android:hint="Anil"
+        android:hint="Your Full Name"
         android:inputType="number"
         />
 
-    <TextView
-        android:id="@+id/last_name"
-        android:layout_below="@id/firtName"
-        android:layout_marginStart="60sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:text="Last Name: "
-        />
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/last_name"
-        android:layout_marginStart="60sp"
-        android:hint="Poudyal"
-        android:inputType="number"
-        />
+
     <TextView
         android:id="@+id/city_name"
-        android:layout_below="@id/lastName"
+        android:layout_below="@id/firstName"
         android:layout_marginStart="60sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

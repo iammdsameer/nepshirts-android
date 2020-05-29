@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                         else{
 
                             Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, RecyclerViewAdapter.class));
+                            startActivity(new Intent(LoginActivity.this, UserProfile.class));
                         }
                     }
                 });
