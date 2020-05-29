@@ -16,13 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SingleCategory extends AppCompatActivity {
     List<ShirtsModelClass> modelClassList = new ArrayList<>();
-    private GoogleSignInAccount acct;
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,8 +63,7 @@ public class SingleCategory extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
        switch (item.getItemId()){
            case R.id.profileIcon:
-               acct = GoogleSignIn.getLastSignedInAccount(this);
-               if(acct ==null){
+               if(FirebaseAuth.getInstance().getCurrentUser() !=null){
                 Intent intent = new Intent(SingleCategory.this,UserProfile.class);
                 startActivity(intent);
                 return true;
