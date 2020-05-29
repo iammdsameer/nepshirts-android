@@ -3,13 +3,11 @@ package com.nepshirts.android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,11 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nepshirts.android.models.UserModel;
 
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText fullName,userEmail,userPhoneNumber,userGender,userBirthDate,userPassword, confirmPassword;
@@ -61,13 +59,13 @@ public class Register extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null){
-            Intent home = new Intent(Register.this,Home.class);
+            Intent home = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(home);
         }
     }
 
     public void login_page(View view) {
-        Intent myIntent = new Intent(Register.this, MainActivity.class);
+        Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(myIntent);
         finish();
     }
@@ -106,7 +104,7 @@ public class Register extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if(task.isSuccessful()){
-                        Toast.makeText(Register.this, "Firebase User Created", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Firebase User Created", Toast.LENGTH_SHORT).show();
                         UserModel user = new UserModel(name,email,phone,gender,birthday);
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -114,9 +112,9 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(Register.this, "User Data Added", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, "User Data Added", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    Toast.makeText(Register.this, "Could not add Data", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, "Could not add Data", Toast.LENGTH_SHORT).show();
                                 }
                                 
                             }
@@ -124,7 +122,7 @@ public class Register extends AppCompatActivity {
                         ;
 
                     }else{
-                        Toast.makeText(Register.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -134,7 +132,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void homepage(View view) {
-        Intent intent = new Intent(Register.this,SingleCategory.class);
+        Intent intent = new Intent(RegisterActivity.this,SingleCategory.class);
         startActivity(intent);
         finish();
     }

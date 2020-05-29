@@ -2,7 +2,6 @@ package com.nepshirts.android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,19 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.nepshirts.android.models.ShirtsModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SingleCategory extends AppCompatActivity {
-    List<ShirtsModelClass> modelClassList = new ArrayList<>();
+    List<ShirtsModel> modelClassList = new ArrayList<>();
 
 
 
@@ -34,10 +30,10 @@ public class SingleCategory extends AppCompatActivity {
         setContentView(R.layout.single_category);
 
 
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4)); //rating todo
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "getLaugh()","Rs. 500", "Humour", 5));
-        modelClassList.add(new ShirtsModelClass(R.drawable.t1, "test","Free", "haha", 5));
+        modelClassList.add(new ShirtsModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4)); //rating todo
+        modelClassList.add(new ShirtsModel(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));
+        modelClassList.add(new ShirtsModel(R.drawable.t1, "getLaugh()","Rs. 500", "Humour", 5));
+        modelClassList.add(new ShirtsModel(R.drawable.t1, "test","Free", "haha", 5));
 
         initRecyclerView();
     }
@@ -51,7 +47,7 @@ public class SingleCategory extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
     }
-
+//
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater =getMenuInflater();
@@ -68,7 +64,7 @@ public class SingleCategory extends AppCompatActivity {
                 startActivity(intent);
                 return true;
                }else{
-                   Intent intent = new Intent(SingleCategory.this,MainActivity.class);
+                   Intent intent = new Intent(SingleCategory.this, LoginActivity.class);
                    startActivity(intent);
                    return true;
                }
@@ -77,6 +73,7 @@ public class SingleCategory extends AppCompatActivity {
                return super.onOptionsItemSelected(item);
 
        }
-
     }
+
+
 }

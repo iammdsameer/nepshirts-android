@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+
+import com.nepshirts.android.LoginActivity;
+import com.nepshirts.android.R;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -21,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

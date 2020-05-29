@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/cart_id"
         android:icon="@drawable/heart"
         android:layout_centerVertical="true"
-        android:title="" />
-
+        android:title="one" />
+    <item
+        android:id="@+id/home_id"
+        android:icon="@drawable/heart"
+        android:layout_centerVertical="true"
+        android:title="second" />
+    <item
+        android:id="@+id/search_id"
+        android:icon="@drawable/heart"
+        android:layout_centerVertical="true"
+        android:title="third" />
 </menu>

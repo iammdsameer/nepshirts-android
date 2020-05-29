@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.models;
 
 public class UserModel {
 

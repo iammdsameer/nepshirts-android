@@ -9,10 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nepshirts.android.models.ShirtsModel;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG= "RecyclerViewAdapter";
 
-    private List<ShirtsModelClass> modelClassList;
+    private List<ShirtsModel> modelClassList;
     private Context mContext;
 
-    public RecyclerViewAdapter(List<ShirtsModelClass> modelClassList, Context mContext){
+    public RecyclerViewAdapter(List<ShirtsModel> modelClassList, Context mContext){
         this.modelClassList = modelClassList;
         this.mContext = mContext;
     }

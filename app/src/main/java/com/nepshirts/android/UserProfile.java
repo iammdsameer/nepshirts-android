@@ -6,22 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 public class UserProfile extends AppCompatActivity {
     private TextView userName;
@@ -64,7 +58,7 @@ public class UserProfile extends AppCompatActivity {
             phone.setText(personId);
 
         }else{
-            Intent intent = new Intent(UserProfile.this,MainActivity.class);
+            Intent intent = new Intent(UserProfile.this, LoginActivity.class);
             startActivity(intent);
 
         }
@@ -81,7 +75,7 @@ public class UserProfile extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user ==null){
-                    Intent intent = new Intent(UserProfile.this,MainActivity.class);
+                    Intent intent = new Intent(UserProfile.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
