@@ -130,6 +130,17 @@
         android:text="Register"
 
         />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip >"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/reg_button"
+        android:layout_below="@+id/password2"
+        android:layout_marginLeft="25dp"
+        android:onClick="homepage"
+        />
 
     <TextView
         android:id="@+id/register_view"

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      getSupportActionBar().hide();
 
         email = findViewById(R.id.email_input);
         password = findViewById(R.id.password_input);
@@ -171,4 +172,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void homepage(View view) {
+        Intent myIntent = new Intent(MainActivity.this, SingleCategory.class);
+        startActivity(myIntent);
+        finish();
+    }
 }
