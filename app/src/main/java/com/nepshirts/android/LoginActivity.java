@@ -24,10 +24,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.nepshirts.android.models.UserModel;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText email,password;
+    private EditText email, password;
     private Button login;
     private SignInButton g_btn;
     private GoogleSignInClient client;
@@ -42,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         isauthenticated = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() !=null){
+                if (firebaseAuth.getCurrentUser() != null) {
 
                     startActivity(new Intent(LoginActivity.this, SingleCategory.class));
                 }
@@ -57,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      getSupportActionBar().hide();
+        getSupportActionBar().hide();
 
         email = findViewById(R.id.email_input);
         password = findViewById(R.id.password_input);
@@ -89,22 +92,20 @@ public class LoginActivity extends AppCompatActivity {
                 String uemail = email.getText().toString();
                 String upassword = password.getText().toString();
 
-                if(uemail.isEmpty()){
+                if (uemail.isEmpty()) {
                     email.setError("Email is empty");
                     email.requestFocus();
-                }
-                else if(upassword.isEmpty()){
+                } else if (upassword.isEmpty()) {
                     password.setError("Password is empty");
                     password.requestFocus();
                 }
 
-                mAuth.signInWithEmailAndPassword(uemail,upassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(uemail, upassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
+                        if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Email or password is wrong!!!", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+                        } else {
 
                             Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, UserProfile.class));
@@ -115,10 +116,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
     private void signIn() {
         Intent signInIntent = client.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,6 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("ERROR: ", "Google sign in failed", e);
@@ -137,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d("ERROR: ", "firebaseAuthWithGoogle:" + acct.getId());
 
@@ -150,6 +156,39 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("ERROR: ", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(LoginActivity.this, "Login Success!!", Toast.LENGTH_SHORT).show();
+
+                            //storing user information in firebase database
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+                            String DBKey = ref.getKey();
+
+
+                            if (DBKey == null) {
+                                String name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString();
+                                String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                                String phone = "Update Your Phone Number";
+                                String gender = "";
+                                String birthday = "";
+                                String city = "Update city";
+                                String street = "update street";
+                                String landmark ="update landmark";
+                                UserModel newUser = new UserModel(name, email, phone, gender, birthday, city,street,landmark);
+                                FirebaseDatabase.getInstance().getReference("Users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(LoginActivity.this, "User Data Added", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Could not add Data", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+                                })
+                                ;
+                            }
+
+
                             startActivity(new Intent(LoginActivity.this, UserProfile.class));
                         } else {
                             // If sign in fails, display a message to the user.
@@ -161,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-    
 
 
     public void register_page(View view) {

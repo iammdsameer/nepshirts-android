@@ -165,6 +165,7 @@
         android:layout_below="@id/landmarkName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50sp"
+        android:onClick="onUpdateListener"
         />
 
 

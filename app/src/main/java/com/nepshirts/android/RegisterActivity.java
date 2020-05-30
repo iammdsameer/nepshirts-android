@@ -23,8 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText fullName,userEmail,userPhoneNumber,userGender,userBirthDate,userPassword, confirmPassword;
-    private Button registerBtn;
-
 
 
     @Override
@@ -42,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         userBirthDate = findViewById(R.id.birthday);
         userPassword = findViewById(R.id.password2);
         confirmPassword  = findViewById(R.id.password1);
-        registerBtn = findViewById(R.id.reg_button);
+        Button registerBtn = findViewById(R.id.reg_button);
 
 
 
@@ -105,7 +103,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(task.isSuccessful()){
                         Toast.makeText(RegisterActivity.this, "Firebase User Created", Toast.LENGTH_SHORT).show();
-                        UserModel user = new UserModel(name,email,phone,gender,birthday);
+                        String city = "Update city";
+                        String street = "update street";
+                        String landmark ="update landmark";
+                        UserModel user = new UserModel(name,email,phone,gender,birthday,city,street,landmark);
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
