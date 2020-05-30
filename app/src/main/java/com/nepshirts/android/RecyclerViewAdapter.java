@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nepshirts.android.models.ShirtsModel;
+import com.nepshirts.android.models.ShirtModel;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG= "RecyclerViewAdapter";
 
-    private List<ShirtsModel> modelClassList;
+    private List<ShirtModel> modelClassList;
     private Context mContext;
 
-    public RecyclerViewAdapter(List<ShirtsModel> modelClassList, Context mContext){
+    public RecyclerViewAdapter(List<ShirtModel> modelClassList, Context mContext){
         this.modelClassList = modelClassList;
         this.mContext = mContext;
     }
@@ -51,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 //                Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext,SingleProduct.class);
+                Intent intent = new Intent(mContext, ViewProduct.class);
                 intent.putExtra("Image",modelClassList.get(position).getShirtImage());
                 intent.putExtra("Name",modelClassList.get(position).getShirtName());
                 intent.putExtra("Price",modelClassList.get(position).getShirtPrice());

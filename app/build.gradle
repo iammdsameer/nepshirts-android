@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     //like button dependency
-    compile 'com.github.jd-alexander:LikeButton:0.2.3'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     //material design dependency
     implementation 'com.google.android.material:material:1.1.0'
 

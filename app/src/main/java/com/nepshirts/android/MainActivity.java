@@ -1,13 +1,16 @@
 package com.nepshirts.android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +29,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bottomNavigation = findViewById(R.id.bottom_nav_id);
         bottomNavigation.setOnNavigationItemSelectedListener(navListner);
+        bottomNavigation.setSelectedItemId(R.id.home_id);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_id, new HomeFragment()).commit();
+        init();
+
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setCustomView(R.layout.main_toolbar);
+        }
+
+    }
+
+
+    private void init(){
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_id, homeFragment, "home_fragment" );
+        //back stack
+        transaction.commit();
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navListner =

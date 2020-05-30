@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class SingleProduct extends AppCompatActivity {
+public class ViewProduct extends AppCompatActivity {
     private ImageView shirtImage;
     private TextView shirtName;
     private TextView shirtPrice;

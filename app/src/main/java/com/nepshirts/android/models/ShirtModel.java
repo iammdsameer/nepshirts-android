@@ -1,13 +1,13 @@
 package com.nepshirts.android.models;
 
-public class ShirtsModel {
+public class ShirtModel {
     private int shirtImage;
     private String shirtName;
     private String shirtPrice;
     private String shirtCategory;
     private float shirtRating;
 
-    public ShirtsModel(int shirtImage, String shirtName, String shirtPrice, String shirtCategory, float shirtRating) { //, int shirtRating
+    public ShirtModel(int shirtImage, String shirtName, String shirtPrice, String shirtCategory, float shirtRating) { //, int shirtRating
         this.shirtImage = shirtImage;
         this.shirtName = shirtName;
         this.shirtPrice = shirtPrice;
