@@ -33,6 +33,8 @@ public class SingleCategory extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
+        String shirtCategory = "Event";
+
         modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4));
         modelClassList.add(new ShirtModel(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));
         modelClassList.add(new ShirtModel(R.drawable.t1, "getLaugh()","Rs. 500", "Humour", 5));
@@ -60,14 +62,14 @@ public class SingleCategory extends AppCompatActivity {
 //    @Override
 //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //       switch (item.getItemId()){
-//           case R.id.profileIcon:
+//           case R.id.profile_icon_id:
 //               if(FirebaseAuth.getInstance().getCurrentUser() !=null){
-//                Intent intent = new Intent(SingleCategory.this,UserProfile.class);
-//                startActivity(intent);
+//                Intent intent = new Intent(this,UserProfile.class);
+//                this.startActivity(intent);
 //                return true;
 //               }else{
-//                   Intent intent = new Intent(SingleCategory.this, LoginActivity.class);
-//                   startActivity(intent);
+//                   Intent intent = new Intent(this, LoginActivity.class);
+//                   this.startActivity(intent);
 //                   return true;
 //               }
 //

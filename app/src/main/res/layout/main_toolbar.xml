@@ -20,14 +20,16 @@
             android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/profile_icon_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_user"
+                android:layout_marginRight="12dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:onClick=""/>
+                android:onClick="viewProfile"
+                />
 
             <View
                 android:layout_width="match_parent"

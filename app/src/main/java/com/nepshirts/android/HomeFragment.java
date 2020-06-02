@@ -1,58 +1,76 @@
 package com.nepshirts.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.nepshirts.android.models.ShirtModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "HomeFragment";
 
-
-    private static final int NUM_COLUMNS = 2; //staggered vs normal
-
-    List<ShirtModel> modelClassList = new ArrayList<>();
-
-    private RecyclerView recyclerView;
      
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
+        View view = inflater.inflate(R.layout.category_list, container, false);
         Log.d(TAG, "onCreateView: started");
 
-        recyclerView = view.findViewById(R.id.recycler_view);
+        ImageView humour = view.findViewById(R.id.category_humour);
+        ImageView programming = view.findViewById(R.id.category_programming);
+        ImageView event = view.findViewById(R.id.category_event);
+        ImageView fandom = view.findViewById(R.id.category_fandom);
 
-        modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4));
-        modelClassList.add(new ShirtModel(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));
-        modelClassList.add(new ShirtModel(R.drawable.t1, "getLaugh()","Rs. 500", "Humour", 5));
-        modelClassList.add(new ShirtModel(R.drawable.t1, "test","Free", "haha", 5));
-
-        initRecyclerView();
+        humour.setOnClickListener(this);
+        programming.setOnClickListener(this);
+        event.setOnClickListener(this);
+        fandom.setOnClickListener(this);
 
         return view;
     }
 
 
-    private void initRecyclerView(){
-//        Log.d(TAG, "initRecyclerView: init recyclerview.");
+    @Override
+    public void onClick(View v) {
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(modelClassList, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
+        Fragment currentFragment=null;
+        Bundle args = new Bundle();
+        switch (v.getId()){
+            case R.id.category_humour:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "humour");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_event:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "event");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_fandom:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "fandom");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_programming:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "programming");
+                currentFragment.setArguments(args);
+                break;
+        }
+        getFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
 
     }
+
+
 }
