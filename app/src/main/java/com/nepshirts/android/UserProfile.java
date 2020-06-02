@@ -65,10 +65,16 @@ public class UserProfile extends AppCompatActivity {
                         Toast.makeText(UserProfile.this, "Unable to extract Data", Toast.LENGTH_SHORT).show();
                     }
                     try {
+
                         Uri personPhoto = user.getPhotoUrl();
-                        Picasso.get().load(personPhoto).into(profileImage);
+
+
+                        Picasso.get().load(personPhoto).placeholder(R.drawable.ic_user).into(profileImage);
+
+
 
                     } catch (Exception e) {
+
                         Toast.makeText(UserProfile.this, "Profile Photo Could not be loaded", Toast.LENGTH_LONG).show();
                     }
 
