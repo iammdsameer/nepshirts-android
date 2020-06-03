@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.category_list, container, false);
+        View view = inflater.inflate(R.layout.home_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
         ImageView humour = view.findViewById(R.id.category_humour);
@@ -44,6 +44,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Fragment currentFragment=null;
         Bundle args = new Bundle();
         switch (v.getId()){
+            case R.id.all_products:
+                currentFragment = new AllProductsFragment();
+                break;
             case R.id.category_humour:
                 currentFragment = new CategoryFragment();
                 args.putString("category", "humour");

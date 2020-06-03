@@ -12,14 +12,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nepshirts.android.models.ShirtModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class AllProductsFragment extends Fragment {
 
+    public AllProductsFragment() {
+        // Required empty public constructor
+    }
 
     private static final String TAG = "CategoryFragment";
 
@@ -37,14 +44,12 @@ public class CategoryFragment extends Fragment {
         Log.d(TAG, "onCreateView: started");
 
 
-        String category = getArguments().getString("category");
-
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", category, 4));
-        modelClassList.add(new ShirtModel(R.drawable.binary, "Binary","Rs. 699", category, 3));
-        modelClassList.add(new ShirtModel(R.drawable.t1, "getLaugh()","Rs. 500", category, 5));
-        modelClassList.add(new ShirtModel(R.drawable.incognito, "test","Free", category, 5));
+        modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4));
+        modelClassList.add(new ShirtModel(R.drawable.binary, "Binary","Rs. 699", "Programming", 3));
+        modelClassList.add(new ShirtModel(R.drawable.t1, "getLaugh()","Rs. 500", "Fandom", 5));
+        modelClassList.add(new ShirtModel(R.drawable.incognito, "test","Free", "Humour", 5));
 
         initRecyclerView();
 

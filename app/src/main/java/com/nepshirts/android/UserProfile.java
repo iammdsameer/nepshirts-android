@@ -33,6 +33,7 @@ public class UserProfile extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener mauthAuthStateListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +139,7 @@ public class UserProfile extends AppCompatActivity {
         }
     }
 
+
     public void onUpdateListener(View view) {
 
         try {
@@ -157,5 +159,6 @@ public class UserProfile extends AppCompatActivity {
         }
 
     }
+
 
 }

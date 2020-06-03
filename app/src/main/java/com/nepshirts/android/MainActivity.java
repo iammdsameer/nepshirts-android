@@ -10,23 +10,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
 
+    private boolean isInFront = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottom_nav_id);
         bottomNavigation.setOnNavigationItemSelectedListener(navListner);
         bottomNavigation.setSelectedItemId(R.id.home_id);
@@ -38,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setCustomView(R.layout.main_toolbar);
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "Paused", Toast.LENGTH_LONG).show();
+        isInFront = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isInFront = true;
     }
 
 
@@ -77,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
             };
 
     public void viewProfile(View view) {
-        Intent intent = new Intent(getBaseContext(), UserProfile.class);
-        startActivity(intent);
-        finish();
+        if (isInFront = true) {
+            Intent intent = new Intent(getBaseContext(), UserProfile.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 }
