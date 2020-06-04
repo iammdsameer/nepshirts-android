@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.nepshirts.android.HomeFragment;
+import com.nepshirts.android.LoginActivity;
 import com.nepshirts.android.R;
 import com.nepshirts.android.UserProfile;
 import com.nepshirts.android.home.CartFragment;
@@ -24,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
     private ImageView profileIcon;
-
+    private FirebaseAuth.AuthStateListener mauthAuthStateListener;
     private boolean isInFront = false;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +39,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnNavigationItemSelectedListener(navListner);
         bottomNavigation.setSelectedItemId(R.id.home_id);
         profileIcon = findViewById(R.id.profile_icon_id);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProfileFragment profile = new ProfileFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_id, profile);;
-                transaction.commit();
-                bottomNavigation.setVisibility(View.GONE);
+                setupFirebaseListener();
             }
         });
 
@@ -52,6 +53,37 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             getSupportActionBar().setCustomView(R.layout.main_toolbar);
         }
+
+    }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseAuth.getInstance().addAuthStateListener(mauthAuthStateListener);
+//    }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (mauthAuthStateListener != null) {
+//            FirebaseAuth.getInstance().removeAuthStateListener(mauthAuthStateListener);
+//        }
+//    }
+    private void setupFirebaseListener() {
+
+                if (user == null) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                }else{
+                    ProfileFragment profile = new ProfileFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_id, profile);;
+                    transaction.commit();
+                    bottomNavigation.setVisibility(View.GONE);
+                }
+
 
     }
 

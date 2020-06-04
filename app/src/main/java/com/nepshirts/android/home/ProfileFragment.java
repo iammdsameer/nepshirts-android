@@ -54,7 +54,6 @@ public class ProfileFragment extends Fragment {
 
         logoutButton = view.findViewById(R.id.logout_button);
         updateButton = view.findViewById(R.id.profile_update_button);
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +64,7 @@ public class ProfileFragment extends Fragment {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 try {
                     ref.child("landmark").setValue(landmark.getText().toString());
                     ref.child("street").setValue(street.getText().toString());

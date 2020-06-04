@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.home.MainActivity;
+import com.nepshirts.android.home.ProfileFragment;
 import com.nepshirts.android.models.UserModel;
 
 
@@ -113,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
 
                             Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, RecyclerViewAdapter.class));
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                     }
                 });
@@ -200,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
 
 
-                            startActivity(new Intent(LoginActivity.this, UserProfile.class));
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("ERROR: ", "signInWithCredential:failure", task.getException());
