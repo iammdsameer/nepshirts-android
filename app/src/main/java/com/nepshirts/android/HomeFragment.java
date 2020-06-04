@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +26,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
+        TextView viewMore = view.findViewById(R.id.all_products);
         ImageView humour = view.findViewById(R.id.category_humour);
         ImageView programming = view.findViewById(R.id.category_programming);
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
 
+        viewMore.setOnClickListener(this);
         humour.setOnClickListener(this);
         programming.setOnClickListener(this);
         event.setOnClickListener(this);
