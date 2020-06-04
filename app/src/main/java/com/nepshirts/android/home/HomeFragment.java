@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.home;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.nepshirts.android.AllProductsFragment;
+import com.nepshirts.android.R;
 import com.nepshirts.android.home.CategoryFragment;
 
 

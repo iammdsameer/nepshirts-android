@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nepshirts.android.R;
+import com.nepshirts.android.SingleCategory;
 import com.nepshirts.android.home.MainActivity;
 import com.nepshirts.android.models.UserModel;
 
@@ -134,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void homepage(View view) {
-        Intent intent = new Intent(RegisterActivity.this,SingleCategory.class);
+        Intent intent = new Intent(RegisterActivity.this, SingleCategory.class);
         startActivity(intent);
         finish();
     }

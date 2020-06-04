@@ -1,6 +1,7 @@
 package com.nepshirts.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nepshirts.android.models.ShirtModel;
@@ -33,7 +35,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull searchViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull searchViewHolder holder,final int i) {
         int initialPrice  = Integer.parseInt(list.get(i).getPrice());
         int discPrice =Integer.parseInt(list.get(i).getDisPrice());
         int percent = (discPrice*100)/initialPrice;
@@ -54,7 +56,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
 
         Picasso.get().load(img).into(holder.productImage);
 
-        holder.desc.setText(list.get(i).getDescription());
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ViewProduct.class);
+                intent.putExtra("Image",list.get(i).getImageUrl());
+                intent.putExtra("Name",list.get(i).getProductNames());
+                intent.putExtra("Price",list.get(i).getPrice());
+                intent.putExtra("Category",list.get(i).getProductCategory());
+                intent.putExtra("Rating",list.get(i).getRating());
+
+                mContext.startActivity(intent);
+            }
+        });
+
+//        holder.desc.setText(list.get(i).getDescription());
 
 
 
@@ -67,6 +83,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
     class  searchViewHolder extends RecyclerView.ViewHolder{
         ImageView productImage;
         TextView category,title,price1,price2,percentage,desc;
+        CardView parentLayout;
 
         public searchViewHolder(@NonNull View view) {
             super(view);
@@ -77,6 +94,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
             price2 = view.findViewById(R.id.search_result_price2);
             percentage   = view.findViewById(R.id.discount_percentage);
             desc = view.findViewById(R.id.search_result_item_desc);
+            parentLayout = view.findViewById(R.id.search_result_card);
 
         }
     }

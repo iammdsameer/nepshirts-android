@@ -1,4 +1,5 @@
 package com.nepshirts.android.home;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,28 +23,28 @@ import com.nepshirts.android.R;
 import com.nepshirts.android.ViewProduct;
 import com.nepshirts.android.models.ShirtModel;
 import com.nepshirts.android.SearchAdapter;
+
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment  implements View.OnClickListener{
-        private static final String TAG = "SearchFragment";
-        private RecyclerView search_results;
-        SearchView searchView;
-        private EditText search_text;
-        private DatabaseReference ref;
-        ArrayList<ShirtModel> list;
+public class SearchFragment extends Fragment implements View.OnClickListener {
+    private static final String TAG = "SearchFragment";
+    private RecyclerView search_results;
+    SearchView searchView;
+    private EditText search_text;
+    private DatabaseReference ref;
+    ArrayList<ShirtModel> list;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view =inflater.inflate(R.layout.search_fragment,container,false);
+        View view = inflater.inflate(R.layout.search_fragment, container, false);
 
-            search_results = view.findViewById(R.id.search_results);
-            searchView = view.findViewById(R.id.search_input);
-            ref = FirebaseDatabase.getInstance().getReference().child("Products");
-            return   view;
+        search_results = view.findViewById(R.id.search_results);
+        searchView = view.findViewById(R.id.search_input);
+        ref = FirebaseDatabase.getInstance().getReference().child("Products");
+        return view;
     }
-
 
 
 //    //    // searches for products
@@ -112,16 +114,16 @@ public class SearchFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onStart() {
         super.onStart();
-        if (ref !=null ){
+        if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()){
+                    if (dataSnapshot.exists()) {
                         list = new ArrayList<>();
-                        for(DataSnapshot res : dataSnapshot.getChildren()){
+                        for (DataSnapshot res : dataSnapshot.getChildren()) {
                             list.add(res.getValue(ShirtModel.class));
                         }
-                        SearchAdapter adapter = new SearchAdapter(list,getActivity());
+                        SearchAdapter adapter = new SearchAdapter(list, getActivity());
                         search_results.setAdapter(adapter);
                         search_results.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -135,7 +137,7 @@ public class SearchFragment extends Fragment  implements View.OnClickListener{
             });
 
         }
-        if (searchView !=null){
+        if (searchView != null) {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
@@ -151,20 +153,22 @@ public class SearchFragment extends Fragment  implements View.OnClickListener{
         }
 
     }
-    private void search(String str){
-    ArrayList<ShirtModel> mList = new ArrayList<>();
-for(ShirtModel shirt:list){
-    try{
-    if(shirt.getDescription().toLowerCase().contains(str.toLowerCase())
-            || shirt.getProductNames().toLowerCase().contains(str.toLowerCase()) ||
-            shirt.getProductCategory().toLowerCase().contains(str.toLowerCase())){
-        mList.add(shirt);
-    }}catch (Exception e){
-        //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
-    }
-}
-        SearchAdapter searchAdapter = new SearchAdapter(mList,getActivity());
-            search_results.setAdapter(searchAdapter);
+
+    private void search(String str) {
+        ArrayList<ShirtModel> mList = new ArrayList<>();
+        for (ShirtModel shirt : list) {
+            try {
+                if (shirt.getDescription().toLowerCase().contains(str.toLowerCase())
+                        || shirt.getProductNames().toLowerCase().contains(str.toLowerCase()) ||
+                        shirt.getProductCategory().toLowerCase().contains(str.toLowerCase())) {
+                    mList.add(shirt);
+                }
+            } catch (Exception e) {
+                //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
+            }
+        }
+        SearchAdapter searchAdapter = new SearchAdapter(mList, getActivity());
+        search_results.setAdapter(searchAdapter);
 
     }
 

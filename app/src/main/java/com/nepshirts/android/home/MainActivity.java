@@ -16,12 +16,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.nepshirts.android.HomeFragment;
-import com.nepshirts.android.LoginActivity;
+import com.nepshirts.android.user.LoginActivity;
 import com.nepshirts.android.R;
-import com.nepshirts.android.UserProfile;
-import com.nepshirts.android.home.CartFragment;
-import com.nepshirts.android.home.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupFirebaseListener();
+                viewProfile();
             }
         });
 
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 //            FirebaseAuth.getInstance().removeAuthStateListener(mauthAuthStateListener);
 //        }
 //    }
-    private void setupFirebaseListener() {
+    private void viewProfile() {
 
                 if (user == null) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);

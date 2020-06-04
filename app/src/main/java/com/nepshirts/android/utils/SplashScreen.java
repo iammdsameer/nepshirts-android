@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.nepshirts.android.LoginActivity;
+import com.nepshirts.android.user.LoginActivity;
 import com.nepshirts.android.R;
 
 public class SplashScreen extends AppCompatActivity {

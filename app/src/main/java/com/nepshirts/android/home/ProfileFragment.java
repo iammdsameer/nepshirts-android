@@ -23,9 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nepshirts.android.LoginActivity;
+import com.nepshirts.android.user.LoginActivity;
 import com.nepshirts.android.R;
-import com.nepshirts.android.UserProfile;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -49,7 +48,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_user_profile, container, false);
+        View view = inflater.inflate(R.layout.profile_fragment, container, false);
         setupFirebaseListener();
 
         logoutButton = view.findViewById(R.id.logout_button);

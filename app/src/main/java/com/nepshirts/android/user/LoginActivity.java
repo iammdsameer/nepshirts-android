@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nepshirts.android.R;
 import com.nepshirts.android.home.MainActivity;
-import com.nepshirts.android.home.ProfileFragment;
 import com.nepshirts.android.models.UserModel;
 
 

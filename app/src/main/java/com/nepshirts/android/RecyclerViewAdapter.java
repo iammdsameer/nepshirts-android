@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nepshirts.android.models.ShirtModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,15 +44,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int initialPrice  = Integer.parseInt(list.get(i).getPrice());
         int discPrice =Integer.parseInt(list.get(i).getDisPrice());
         int percent = (discPrice*100)/initialPrice;
-        Uri img = Uri.parse(list.get(i).getImageUrl());
+        int rating = Integer.parseInt(list.get(i).getRating());
+        String p = String.valueOf(percent);
+        final Uri img = Uri.parse(list.get(i).getImageUrl());
 
-        holder.shirtPrice.setText(list.get(i).getPrice());
-//        holder.price2.setText(list.get(i).getDisPrice());
-//        holder.percentage.setText(percent);
-        holder.shirtCategory.setText(list.get(i).getProductCategory());
         holder.shirtName.setText(list.get(i).getProductNames());
-        holder.shirtImage.setImageURI(img);
-//        holder.desc.setText(list.get(i).getDescription());
+//        holder.price1.setText(list.get(i).getPrice());
+//        holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+        holder.shirtPrice.setText(list.get(i).getDisPrice());
+//        holder.percentage.setText(p+"%"+" Discount");
+
+        holder.shirtCategory.setText(list.get(i).getProductCategory());
+        holder.shirtRating.setRating(rating);
+
+        Picasso.get().load(img).into(holder.shirtImage);
 
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
@@ -60,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
 //                Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewProduct.class);
-                intent.putExtra("Image",list.get(i).getImageUrl());
+                intent.putExtra("Image",img.toString());
                 intent.putExtra("Name",list.get(i).getProductNames());
                 intent.putExtra("Price",list.get(i).getPrice());
                 intent.putExtra("Category",list.get(i).getProductCategory());

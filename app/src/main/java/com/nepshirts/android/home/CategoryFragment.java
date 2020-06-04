@@ -12,7 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
 import com.nepshirts.android.models.ShirtModel;
@@ -30,6 +36,9 @@ public class CategoryFragment extends Fragment {
 
     List<ShirtModel> modelClassList = new ArrayList<>();
 
+    private DatabaseReference ref;
+    ArrayList<ShirtModel> shirtList = new ArrayList<>();
+    ArrayList<ShirtModel> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
 
     @Nullable
@@ -42,24 +51,66 @@ public class CategoryFragment extends Fragment {
         String category = getArguments().getString("category");
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        String urlss= "https://res.cloudinary.com/nepshirts/image/upload/$wpsize_!_cld_full!,w_1024,h_1024,c_scale/v1589152475/wp-content/uploads/AF365BA9-82C9-432F-9AD6-37B5690BD2A1-1024x1024-1.jpeg";
-        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
+//        String urlss= "https://res.cloudinary.com/nepshirts/image/upload/$wpsize_!_cld_full!,w_1024,h_1024,c_scale/v1589152475/wp-content/uploads/AF365BA9-82C9-432F-9AD6-37B5690BD2A1-1024x1024-1.jpeg";
+//        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
 
-//        modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", category, 4));
-//        modelClassList.add(new ShirtModel(R.drawable.binary, "Binary","Rs. 699", category, 3));
-//        modelClassList.add(new ShirtModel(R.drawable.t1, "getLaugh()","Rs. 500", category, 5));
-//        modelClassList.add(new ShirtModel(R.drawable.incognito, "test","Free", category, 5));
+        ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        initRecyclerView();
+
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (ref != null) {
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot res : dataSnapshot.getChildren()) {
+                            shirtList.add(res.getValue(ShirtModel.class));
+                        }
+
+                        String category = getArguments().getString("category");
+
+                        for (ShirtModel shirt : shirtList) {
+                            try {
+                                if (shirt.getProductCategory().toLowerCase().contains(category.toLowerCase())) {
+                                    filteredList.add(shirt);
+                                }
+                                Log.d(TAG, "onCreateView: "+ filteredList);
+                            } catch (NullPointerException e) {
+                                //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+                        initRecyclerView();
+                        Log.d(TAG, "onDataChange: "+ shirtList);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }else{
+            Toast.makeText(getActivity(), "NULL", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "onStart: null");
+        }
+
     }
 
 
     private void initRecyclerView(){
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(modelClassList, getActivity());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
 
