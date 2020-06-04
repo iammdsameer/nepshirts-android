@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Categories"
+        android:elevation="10sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,8 @@
         android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headline"
-        android:background="@color/colorPrimary"
+
+        android:src="@drawable/cat4"
          />
 
     <ImageView
@@ -37,19 +39,22 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headline"
-        android:background="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/lightGrey"
+        android:elevation="5sp"
+        android:src="@drawable/cat1"
          />
 
     <ImageView
         android:id="@+id/category_programming"
-        android:layout_width="114dp"
+        android:layout_width="110dp"
         android:layout_height="67dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toStartOf="@+id/category_fandom"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toEndOf="@+id/category_humour"
         app:layout_constraintTop_toBottomOf="@+id/headline"
-        android:background="@color/colorPrimary"
+
+        android:src="@drawable/cat2"
         />
 
     <ImageView
@@ -60,7 +65,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headline"
-        android:background="@color/colorPrimary"
+        android:src="@drawable/cat3"
  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

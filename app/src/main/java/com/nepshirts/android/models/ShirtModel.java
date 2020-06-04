@@ -1,37 +1,66 @@
 package com.nepshirts.android.models;
 
 public class ShirtModel {
-    private int shirtImage;
-    private String shirtName;
-    private String shirtPrice;
-    private String shirtCategory;
-    private float shirtRating;
+    private String id;
+    private String productNames;
+    private String imageUrl;
+    private String price;
+    private String rating;
+    private String description;
+    private String disPrice;
+    private boolean productSizeXL;
+    private boolean getProductSizeXLL;
 
-    public ShirtModel(int shirtImage, String shirtName, String shirtPrice, String shirtCategory, float shirtRating) { //, int shirtRating
-        this.shirtImage = shirtImage;
-        this.shirtName = shirtName;
-        this.shirtPrice = shirtPrice;
-        this.shirtCategory=shirtCategory;
-        this.shirtRating = shirtRating;
+    private String productCategory;
+
+    public ShirtModel() {
     }
 
-    public int getShirtImage() {
-        return shirtImage;
+    public ShirtModel(String id, String productNames, String imageUrl, String price, String rating, String description, String disPrice, Boolean productSizeXL, Boolean getProductSizeXLL, String productCategory) {
+        this.id = id;
+        this.productNames = productNames;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.rating = rating;
+        this.description = description;
+        this.disPrice = disPrice;
+        this.productSizeXL = productSizeXL;
+        this.getProductSizeXLL = getProductSizeXLL;
+        this.productCategory = productCategory;
     }
 
-    public String getShirtName() {
-        return shirtName;
+    public String getId() {
+        return id;
     }
 
-    public String getShirtPrice() {
-        return shirtPrice;
+    public String getProductNames() {
+        return productNames;
     }
 
-    public String getShirtCategory() {
-        return shirtCategory;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public float getShirtRating() {
-        return shirtRating;
+    public String getPrice() {
+        return price;
     }
+
+    public String getRating() { return rating; }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDisPrice() {
+        return disPrice;
+    }
+
+    public Boolean getProductSizeXL() {
+        return productSizeXL;
+    }
+
+    public boolean isGetProductSizeXLL() {
+        return getProductSizeXLL;
+    }
+    public String getProductCategory() { return productCategory;}
 }

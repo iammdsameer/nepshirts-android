@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_result_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:outlineSpotShadowColor="@color/lightGrey"
+        >
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+>        <ImageView
+
+            android:id="@+id/search_result_image"
+            android:layout_width="90sp"
+            android:layout_height="90sp"
+            android:src="@drawable/t1"
+             android:layout_marginRight="10sp"
+            />
+        <TextView
+            android:id="@+id/search_result_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/search_result_image"
+            android:text="Routine of Nepal Banda"
+            android:textColor="#000"
+            />
+    <TextView
+        android:id="@+id/search_result_item_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="02sp"
+        android:layout_toRightOf="@+id/search_result_item_title"
+        android:text="Category"
+        android:textSize="10sp"
+
+        />
+
+        <TextView
+            android:id="@+id/search_result_price1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs .2000"
+            android:layout_marginEnd="10sp"
+
+            android:layout_toEndOf="@id/search_result_image"
+            android:layout_below="@id/search_result_item_title"
+            />
+        <TextView
+            android:id="@+id/search_result_price2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs .1500"
+            android:layout_toEndOf="@id/search_result_price1"
+            android:layout_below="@id/search_result_item_title"
+            />
+        <TextView
+            android:id="@+id/discount_percentage"
+            android:layout_toEndOf="@id/search_result_price2"
+            android:layout_below="@id/search_result_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25% Discount"
+            android:layout_marginStart="60sp"
+            android:background="@color/lightBlue"
+            android:shadowColor="@color/lightGrey"
+            android:textColor="@color/white"
+            android:padding="2sp"
+            />
+        <TextView
+            android:id="@+id/search_result_item_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_result_price2"
+            android:layout_toEndOf="@+id/search_result_image"
+            android:layout_marginEnd="10sp"
+            android:layout_marginTop="10sp"
+            android:text="And oh, what heights we'll hit. On with the show this is it. Lorem Ipsum"
+            android:textSize="12sp"
+            />
+</RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.nepshirts.android;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.nepshirts.android.home.CategoryFragment;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener{

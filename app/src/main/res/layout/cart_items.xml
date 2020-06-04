@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="10sp"
+    android:outlineSpotShadowColor="@color/lightGrey"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/cart_item_image"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:src="@drawable/t1"
+        android:layout_marginRight="10sp"
+        />
+    <TextView
+        android:id="@+id/cart_item_title"
+        android:layout_toRightOf="@id/cart_item_image"
+        android:text="Visit Nepal 2020"
+        android:textColor="@color/black"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+        <TextView
+            android:id="@+id/cart_item_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cart_item_title"
+            android:layout_toRightOf="@id/cart_item_image"
+            android:text="Programming"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:id="@+id/cart_item_price"
+            android:layout_below="@+id/cart_item_category"
+            android:layout_toRightOf="@id/cart_item_image"
+            android:layout_marginTop="25sp"
+            android:text="Rs. 1500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cart_item_title"
+            android:layout_marginStart="150sp"
+            android:layout_below="@id/cart_item_category"
+            android:src="@drawable/ic_delete"
+            android:background="@color/white"
+            android:onClick="deleteFromCart"
+
+            />
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

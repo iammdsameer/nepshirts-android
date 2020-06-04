@@ -14,7 +14,7 @@
         android:windowSoftInputMode="stateVisible|adjustPan">
         <activity android:name=".ViewProduct"></activity>
         <activity android:name=".UserProfile" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".home.MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".utils.SplashScreen">

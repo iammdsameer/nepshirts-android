@@ -2,6 +2,7 @@ package com.nepshirts.android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG= "RecyclerViewAdapter";
 
-    private List<ShirtModel> modelClassList;
+    private List<ShirtModel> list;
     private Context mContext;
 
     public RecyclerViewAdapter(List<ShirtModel> modelClassList, Context mContext){
-        this.modelClassList = modelClassList;
+        this.list = modelClassList;
         this.mContext = mContext;
     }
 
@@ -38,13 +39,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int position) {
-        int img = modelClassList.get(position).getShirtImage();
-        final String name = modelClassList.get(position).getShirtName();
-        String price = modelClassList.get(position).getShirtPrice();
-        String category = modelClassList.get(position).getShirtCategory();
-        int rating = (int) modelClassList.get(position).getShirtRating();
-        holder.setData(img, name, price, category, rating); //,rating
+    public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int i) {
+        int initialPrice  = Integer.parseInt(list.get(i).getPrice());
+        int discPrice =Integer.parseInt(list.get(i).getDisPrice());
+        int percent = (discPrice*100)/initialPrice;
+        Uri img = Uri.parse(list.get(i).getImageUrl());
+
+        holder.shirtPrice.setText(list.get(i).getPrice());
+//        holder.price2.setText(list.get(i).getDisPrice());
+//        holder.percentage.setText(percent);
+        holder.shirtCategory.setText(list.get(i).getProductCategory());
+        holder.shirtName.setText(list.get(i).getProductNames());
+        holder.shirtImage.setImageURI(img);
+//        holder.desc.setText(list.get(i).getDescription());
+
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
 
@@ -52,11 +60,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
 //                Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewProduct.class);
-                intent.putExtra("Image",modelClassList.get(position).getShirtImage());
-                intent.putExtra("Name",modelClassList.get(position).getShirtName());
-                intent.putExtra("Price",modelClassList.get(position).getShirtPrice());
-                intent.putExtra("Category",modelClassList.get(position).getShirtCategory());
-                intent.putExtra("Rating",modelClassList.get(position).getShirtRating());
+                intent.putExtra("Image",list.get(i).getImageUrl());
+                intent.putExtra("Name",list.get(i).getProductNames());
+                intent.putExtra("Price",list.get(i).getPrice());
+                intent.putExtra("Category",list.get(i).getProductCategory());
+                intent.putExtra("Rating",list.get(i).getRating());
 
                 mContext.startActivity(intent);
 
@@ -67,7 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return modelClassList.size();
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,12 +98,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
 
-        public void setData(int image, String name, String price, String category, float rating) { //, int rating
-            shirtImage.setImageResource(image);
-            shirtName.setText(name);
-            shirtPrice.setText(price);
-            shirtCategory.setText(category);
-            shirtRating.setRating(rating);
-        }
+//        public void setData(int image, String name, String price, String category, float rating) { //, int rating
+//            shirtImage.setImageResource(image);
+//            shirtName.setText(name);
+//            shirtPrice.setText(price);
+//            shirtCategory.setText(category);
+//            shirtRating.setRating(rating);
+//        }
     }
 }

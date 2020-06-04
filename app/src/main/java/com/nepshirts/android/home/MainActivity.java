@@ -1,4 +1,4 @@
-package com.nepshirts.android;
+package com.nepshirts.android.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,6 +13,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nepshirts.android.HomeFragment;
+import com.nepshirts.android.R;
+import com.nepshirts.android.UserProfile;
+import com.nepshirts.android.home.CartFragment;
+import com.nepshirts.android.home.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
