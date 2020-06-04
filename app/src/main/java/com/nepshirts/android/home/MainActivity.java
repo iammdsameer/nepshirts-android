@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +23,7 @@ import com.nepshirts.android.home.SearchFragment;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
+    private ImageView profileIcon;
 
     private boolean isInFront = false;
 
@@ -32,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_nav_id);
         bottomNavigation.setOnNavigationItemSelectedListener(navListner);
         bottomNavigation.setSelectedItemId(R.id.home_id);
+        profileIcon = findViewById(R.id.profile_icon_id);
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileFragment profile = new ProfileFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_id, profile);;
+                transaction.commit();
+                bottomNavigation.setVisibility(View.GONE);
+            }
+        });
 
         init();
 
@@ -91,12 +104,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-    public void viewProfile(View view) {
-        if (isInFront = true) {
-            Intent intent = new Intent(getBaseContext(), UserProfile.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+//    public void viewProfile() {
+//        if (isInFront = true) {
+//            Intent intent = new Intent(getBaseContext(), UserProfile.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
 
 }

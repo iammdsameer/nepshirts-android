@@ -12,8 +12,6 @@
     android:layout_height="wrap_content"
     >
 
-    <include layout="@layout/main_toolbar"/>
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="96dp"
@@ -22,8 +20,8 @@
         app:civ_border_width="2dp"
         app:civ_border_color="#e8e4e3"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="150sp"
-        android:layout_marginTop="90sp"
+        android:layout_marginStart="100sp"
+        android:layout_marginTop="25sp"
         />
     <TextView
         android:id="@+id/user_name"
@@ -37,12 +35,12 @@
         android:layout_marginStart="155sp"
         />
     <Button
+        android:id="@+id/logout_button"
         android:layout_below="@+id/user_name"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:onClick="logout"
         />
     <TextView
         android:id="@+id/email_label_profile"
@@ -156,6 +154,7 @@
         android:inputType="text"
         />
     <Button
+        android:id="@+id/profile_update_button"
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:background="@color/lightBlue"
@@ -165,7 +164,6 @@
         android:layout_below="@id/landmarkName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50sp"
-        android:onClick="onUpdateListener"
         />
 
 
