@@ -21,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/shirt_image"
-                android:layout_width="178dp"
+                android:layout_width="160dp"
                 android:layout_height="158dp"
                 android:src="@drawable/t1" />
 

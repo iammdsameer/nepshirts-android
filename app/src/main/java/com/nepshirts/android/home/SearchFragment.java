@@ -125,7 +125,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         }
                         SearchAdapter adapter = new SearchAdapter(list, getActivity());
                         search_results.setAdapter(adapter);
-                        search_results.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        search_results.setLayoutManager(new LinearLayoutManager(getActivity()){
+                            @Override
+                            public boolean canScrollVertically() {
+                                return false;
+                            }
+                        });
 
                     }
                 }

@@ -22,6 +22,14 @@
     android:layout_margin="10sp"
     android:layout_height="300sp"
 />
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/calculation_card"
         android:layout_below="@id/cart_items"

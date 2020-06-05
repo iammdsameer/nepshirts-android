@@ -37,8 +37,6 @@ public class CategoryFragment extends Fragment {
     List<ShirtModel> modelClassList = new ArrayList<>();
 
     private DatabaseReference ref;
-    ArrayList<ShirtModel> shirtList = new ArrayList<>();
-    ArrayList<ShirtModel> filteredList = new ArrayList<>();
     private RecyclerView recyclerView;
 
     @Nullable
@@ -54,6 +52,12 @@ public class CategoryFragment extends Fragment {
 //        String urlss= "https://res.cloudinary.com/nepshirts/image/upload/$wpsize_!_cld_full!,w_1024,h_1024,c_scale/v1589152475/wp-content/uploads/AF365BA9-82C9-432F-9AD6-37B5690BD2A1-1024x1024-1.jpeg";
 //        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
@@ -61,16 +65,15 @@ public class CategoryFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String category = getArguments().getString("category");
                     if (dataSnapshot.exists()) {
-
+                        ArrayList<ShirtModel> filteredList = new ArrayList<>();
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
                             if(res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
 
-                                shirtList.add(res.getValue(ShirtModel.class));
+                                filteredList.add(res.getValue(ShirtModel.class));
                             }
                         }
 
-                        initRecyclerView();
-                        Log.d(TAG, "onDataChange: "+ shirtList);
+                        initRecyclerView(filteredList);
 
                     }
                 }
@@ -87,21 +90,13 @@ public class CategoryFragment extends Fragment {
         }
 
 
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
     }
 
 
-    private void initRecyclerView(){
+    private void initRecyclerView(ArrayList<ShirtModel> filteredList){
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(shirtList, getActivity());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
 

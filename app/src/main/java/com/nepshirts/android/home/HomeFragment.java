@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "HomeFragment";
     ArrayList<ShirtModel> tshirts = new ArrayList<>();
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     ArrayList<ShirtModel> randomShirts = new ArrayList<>();
     private RecyclerView recyclerView;
 
-     
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,35 +55,44 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         recyclerView = view.findViewById(R.id.homepage_products);
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
-        if(ref!=null){
+
+        viewMore.setOnClickListener(this);
+        humour.setOnClickListener(this);
+        programming.setOnClickListener(this);
+        event.setOnClickListener(this);
+        fandom.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()){
+                    if (dataSnapshot.exists()) {
 
-                        for(DataSnapshot res:dataSnapshot.getChildren()){
+                        for (DataSnapshot res : dataSnapshot.getChildren()) {
                             tshirts.add(res.getValue(ShirtModel.class));
+                        }
+                        Log.d(TAG, "onDataChange: " + tshirts);
+                        try {
+                            List<Integer> nums = new ArrayList<>();
+                            Random random = new Random();
+                            while (nums.size() < 4) {
+                                int randNum = random.nextInt(tshirts.size());
+                                if (!nums.contains(randNum)) {
+                                    nums.add(randNum);
+                                    randomShirts.add(tshirts.get(randNum));
+                                }
                             }
-                        Log.d(TAG,"onDataChange: "+tshirts);
-                        try{
-                            List<Integer> nums =new ArrayList<>();
-                           Random random = new Random();
-                           while(nums.size()<4) {
-                               int randNum = random.nextInt(tshirts.size());
-                               if (!nums.contains(randNum)){
-                                   nums.add(randNum);
-                                   randomShirts.add(tshirts.get(randNum));
-                           }
-                           }
 
 
-
-
-
-
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(),   "Something went wrong in for loop", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Something went wrong in for loop", Toast.LENGTH_SHORT).show();
                         }
                     }
                     initRecyclerView();
@@ -99,24 +108,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             });
         }
 
-
-
-        viewMore.setOnClickListener(this);
-        humour.setOnClickListener(this);
-        programming.setOnClickListener(this);
-        event.setOnClickListener(this);
-        fandom.setOnClickListener(this);
-
-        return view;
     }
-
 
     @Override
     public void onClick(View v) {
 
-        Fragment currentFragment=null;
+        Fragment currentFragment = null;
         Bundle args = new Bundle();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.all_products:
                 currentFragment = new AllProductsFragment();
                 break;
@@ -148,14 +147,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-    private void initRecyclerView(){
-        RecyclerViewAdapter adpt = new RecyclerViewAdapter(randomShirts,getActivity());
+    private void initRecyclerView() {
+        RecyclerViewAdapter adpt = new RecyclerViewAdapter(randomShirts, getActivity());
         recyclerView.setAdapter(adpt);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
     }
 }
