@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nepshirts.android.R;
+import com.r0adkll.slidr.Slidr;
 import com.squareup.picasso.Picasso;
 
 public class ViewProduct extends AppCompatActivity {
@@ -51,8 +52,7 @@ public class ViewProduct extends AppCompatActivity {
         shirtCategory.setText(category);
 //        shirtRating.setRating(rating);
 
-
-
+        Slidr.attach(this);
 
     }
 }
