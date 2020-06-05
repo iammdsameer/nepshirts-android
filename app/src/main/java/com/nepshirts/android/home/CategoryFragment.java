@@ -55,37 +55,19 @@ public class CategoryFragment extends Fragment {
 //        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
 
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
-
-
-
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String category = getArguments().getString("category");
                     if (dataSnapshot.exists()) {
+
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            shirtList.add(res.getValue(ShirtModel.class));
-                        }
+                            if(res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
 
-                        String category = getArguments().getString("category");
-
-                        for (ShirtModel shirt : shirtList) {
-                            try {
-                                if (shirt.getProductCategory().toLowerCase().contains(category.toLowerCase())) {
-                                    filteredList.add(shirt);
-                                }
-                                Log.d(TAG, "onCreateView: "+ filteredList);
-                            } catch (NullPointerException e) {
-                                //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
+                                shirtList.add(res.getValue(ShirtModel.class));
                             }
                         }
-
 
                         initRecyclerView();
                         Log.d(TAG, "onDataChange: "+ shirtList);
@@ -104,13 +86,22 @@ public class CategoryFragment extends Fragment {
             Log.d(TAG, "onStart: null");
         }
 
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
     }
 
 
     private void initRecyclerView(){
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(shirtList, getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
 

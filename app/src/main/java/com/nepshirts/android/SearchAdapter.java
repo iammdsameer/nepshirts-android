@@ -38,19 +38,31 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
     public void onBindViewHolder(@NonNull searchViewHolder holder,final int i) {
         int initialPrice  = Integer.parseInt(list.get(i).getPrice());
         int discPrice =Integer.parseInt(list.get(i).getDisPrice());
-        int percent = (discPrice*100)/initialPrice;
-        String p = String.valueOf(percent);
+        try {
+            int percent = (discPrice * 100) / initialPrice;
+            if(percent <=0){
+                holder.percentage.setVisibility(View.GONE);
+            }else if(percent ==100){
+                holder.percentage.setText("FREE!!");
+            }else {
+                String p = String.valueOf(percent);
+                holder.percentage.setText(p + "%" + " Discount");
+            }
+        }catch (Exception e){
+
+
+        }
+
         Uri img = Uri.parse(list.get(i).getImageUrl());
 
 
         holder.title.setText(list.get(i).getProductNames());
-        String r = list.get(i).getProductNames();
-        String rr = list.get(i).getProductCategory();
+
         holder.price1.setText(list.get(i).getPrice());
         holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.price2.setText(list.get(i).getDisPrice());
-        holder.percentage.setText(p+"%"+" Discount");
+
 
         holder.category.setText(list.get(i).getProductCategory());
 
@@ -93,7 +105,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
             price1 = view.findViewById(R.id.search_result_price1);
             price2 = view.findViewById(R.id.search_result_price2);
             percentage   = view.findViewById(R.id.discount_percentage);
-            desc = view.findViewById(R.id.search_result_item_desc);
+//            desc = view.findViewById(R.id.search_result_item_desc);
             parentLayout = view.findViewById(R.id.search_result_card);
 
         }

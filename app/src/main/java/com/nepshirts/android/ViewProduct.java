@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,17 +18,24 @@ public class ViewProduct extends AppCompatActivity {
     private TextView shirtName;
     private TextView shirtPrice;
     private TextView shirtCategory;
+    private ImageView backBtn;
 //    private RatingBar shirtRating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_product);
-
+        backBtn = findViewById(R.id.imageView6);
         shirtImage = findViewById(R.id.shirt_image);
         shirtName = findViewById(R.id.shirt_name);
         shirtPrice = findViewById(R.id.shirt_price);
         shirtCategory = findViewById(R.id.shirt_category);
 //        shirtRating = findViewById(R.id.shirt_rating);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         Uri image = Uri.parse(intent.getExtras().getString("Image"));

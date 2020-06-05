@@ -43,9 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int i) {
         int initialPrice  = Integer.parseInt(list.get(i).getPrice());
         int discPrice =Integer.parseInt(list.get(i).getDisPrice());
-        int percent = (discPrice*100)/initialPrice;
+//        int percent = (discPrice*100)/initialPrice;
         int rating = Integer.parseInt(list.get(i).getRating());
-        String p = String.valueOf(percent);
+//        String p = String.valueOf(percent);
         final Uri img = Uri.parse(list.get(i).getImageUrl());
 
         holder.shirtName.setText(list.get(i).getProductNames());
