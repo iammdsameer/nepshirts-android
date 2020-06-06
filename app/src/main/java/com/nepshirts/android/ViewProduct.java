@@ -2,12 +2,16 @@ package com.nepshirts.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -37,7 +41,6 @@ public class ViewProduct extends AppCompatActivity {
         shirtCategory = findViewById(R.id.shirt_category);
 //        shirtRating = findViewById(R.id.shirt_rating);
         addToCart = findViewById(R.id.add_to_cart);
-
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,14 +49,15 @@ public class ViewProduct extends AppCompatActivity {
         });
 
         final Intent intent = getIntent();
-        final Uri image = Uri.parse(intent.getExtras().getString("Image"));
+        final Uri imageUrl = Uri.parse(intent.getExtras().getString("Image"));
         final String name = intent.getExtras().getString("Name");
         final String price = intent.getExtras().getString("Price");
         final String category = intent.getExtras().getString("Category");
 //        int rating = (int) intent.getExtras().getFloat("Rating");
+        final String image = intent.getExtras().getString("Image");
 
 //        shirtImage.setImageResource(image);
-        Picasso.get().load(image).into(shirtImage);
+        Picasso.get().load(imageUrl).into(shirtImage);
         shirtName.setText(name);
         shirtPrice.setText(price);
         shirtCategory.setText(category);
@@ -62,18 +66,37 @@ public class ViewProduct extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name", name);
-                editor.putString("price", price);
-                editor.putString("category", category);
-                editor.putString("image", intent.getExtras().getString("Image"));
-                editor.apply();
-                Toast.makeText(ViewProduct.this, "Added to cart!", Toast.LENGTH_SHORT).show();
+                final Dialog dialogBox = new Dialog(ViewProduct.this, android.R.style.Theme_Black_NoTitleBar);
+                dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
+                dialogBox.setContentView(R.layout.confirm_dialogue);
+                dialogBox.setCanceledOnTouchOutside(true);
+                dialogBox.setCancelable(true);
+                dialogBox.show();
+                Button confirm = dialogBox.findViewById(R.id.confirm_button);
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addToCart(name,price,category,image);
+                        dialogBox.dismiss();
+                    }
+                });
+
             }
         });
 
         Slidr.attach(this);
 
     }
+
+    private void addToCart(String name, String price, String category, String image){
+        SharedPreferences sharedPreferences = getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.putString("price", price);
+        editor.putString("category", category);
+        editor.putString("image", image);
+        editor.apply();
+        Toast.makeText(ViewProduct.this, "Added to cart!", Toast.LENGTH_SHORT).show();
+    }
+
 }

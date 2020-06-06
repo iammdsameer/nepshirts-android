@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    >
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#EEffffff"
+        android:background="@drawable/layout_border"
+        >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true">
+
+    <Spinner
+        android:id="@+id/color_spinner"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/layout_border"/>
+
+    <Spinner
+        android:id="@+id/size_spinner"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/color_spinner"/>
+
+    <Spinner
+        android:id="@+id/quantity_spinner"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/layout_border"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/color_spinner"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_alignParentBottom="true"
+        android:layout_width="255dp"
+        android:layout_height="40dp"
+        android:background="@color/lightBlue"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="addToCart"
+        style="?android:attr/borderlessButtonStyle"/>
+    </RelativeLayout>
+</RelativeLayout>
