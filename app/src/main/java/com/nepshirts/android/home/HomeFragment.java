@@ -6,13 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +47,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView onSaleItems;
     private SliderView sliderView;
     private List<SliderModel> images;
+    private CardView cardView;
 
 
     @Nullable
@@ -189,14 +193,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         RecyclerViewAdapter onSale = new RecyclerViewAdapter(onSaleTshirts,getActivity());
         onSaleItems.setAdapter(onSale);
 
-        onSaleItems.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
+//        CardView.LayoutParams params = new CardView.LayoutParams(
+//                CardView.LayoutParams.WRAP_CONTENT,
+//                CardView.LayoutParams.WRAP_CONTENT
+//        );
+//        params.setMargins(10, 10, 10, 10);
+//        cardView.setLayoutParams(params);
+
+        onSaleItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false) {
+
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false) {
             @Override
             public boolean canScrollVertically() {
                 return false;

@@ -31,6 +31,7 @@ import java.util.Random;
 
 public class CartFragment extends Fragment {
 
+    private static final String TAG = "CartFragment";
     private RecyclerView recyclerView;
     ArrayList<ShirtModel> cartList;
     TextView textView;
@@ -96,8 +97,7 @@ public class CartFragment extends Fragment {
     private void initRecyclerView() {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(ratedItems, getActivity());
         high_rated.setAdapter(adpt);
-
-
+        Log.d(TAG, "initRecyclerView: "+ ratedItems.toString());
 
         high_rated.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
             @Override

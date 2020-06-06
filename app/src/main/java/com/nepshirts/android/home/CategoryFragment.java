@@ -47,7 +47,7 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
-    headerImage = view.findViewById(R.id.category_header_image);
+        headerImage = view.findViewById(R.id.category_header_image);
         String category = getArguments().getString("category");
 
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -60,26 +60,26 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        final String category = getArguments().getString("category");
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
+        if (category.toLowerCase().equals("programming")) {
+            headerImage.setImageResource(R.drawable.header4);
+        } else if (category.toLowerCase().equals("patriotic")) {
+            headerImage.setImageResource(R.drawable.header3);
+        } else if (category.toLowerCase().equals("humour")) {
+            headerImage.setImageResource(R.drawable.header6);
+        } else if (category.toLowerCase().equals("fandom")) {
+            headerImage.setImageResource(R.drawable.header8);
+        }
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String category = getArguments().getString("category");
+
                     if (dataSnapshot.exists()) {
                         ArrayList<ShirtModel> filteredList = new ArrayList<>();
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            if(res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
-                                if(category.toLowerCase().equals("programming") ){
-                                    headerImage.setImageResource(R.drawable.header4);
-                                }else if(category.toLowerCase().equals("patriotic") ){
-                                    headerImage.setImageResource(R.drawable.header3);
-                                }else if(category.toLowerCase().equals("humour") ){
-                                    headerImage.setImageResource(R.drawable.header6);
-                                }else if(category.toLowerCase().equals("fandom") ){
-                                    headerImage.setImageResource(R.drawable.header8);
-                                }
-
+                            if (res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
                                 filteredList.add(res.getValue(ShirtModel.class));
                             }
                         }
@@ -95,7 +95,7 @@ public class CategoryFragment extends Fragment {
                 }
             });
 
-        }else{
+        } else {
             Toast.makeText(getActivity(), "NULL", Toast.LENGTH_LONG).show();
             Log.d(TAG, "onStart: null");
         }
@@ -104,7 +104,7 @@ public class CategoryFragment extends Fragment {
     }
 
 
-    private void initRecyclerView(ArrayList<ShirtModel> filteredList){
+    private void initRecyclerView(ArrayList<ShirtModel> filteredList) {
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());

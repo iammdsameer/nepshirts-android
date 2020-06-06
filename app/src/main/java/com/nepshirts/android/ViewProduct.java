@@ -69,7 +69,7 @@ public class ViewProduct extends AppCompatActivity {
                 final Dialog dialogBox = new Dialog(ViewProduct.this, android.R.style.Theme_Black_NoTitleBar);
                 dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
                 dialogBox.setContentView(R.layout.confirm_dialogue);
-                dialogBox.setCanceledOnTouchOutside(true);
+                dialogBox.setCanceledOnTouchOutside(true); // todo
                 dialogBox.setCancelable(true);
                 dialogBox.show();
                 Button confirm = dialogBox.findViewById(R.id.confirm_button);

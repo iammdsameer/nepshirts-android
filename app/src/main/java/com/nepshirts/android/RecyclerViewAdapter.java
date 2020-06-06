@@ -7,14 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.utils.Constant;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,10 +35,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shirts_layout, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        View view;
+        switch (viewType){
+            case (Constant.HORIZONTAL_VIEW_TYPE):
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shirts_layout_horizontal, parent, false);
+                return new ViewHolder(view);
+
+            case (Constant.GRID_VIEW_TYPE):
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shirts_layout_grid, parent, false);
+                return new ViewHolder(view);
+
+            default:
+                throw new IllegalArgumentException();
+        }
+
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(list.size() > 5){
+            return Constant.GRID_VIEW_TYPE;
+        }else {
+            return Constant.HORIZONTAL_VIEW_TYPE;
+        }
+    }
+
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int i) {
@@ -91,7 +113,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView shirtPrice;
         private TextView shirtCategory;
         private RatingBar shirtRating;
-        private LinearLayout parentLayout;
+        private CardView parentLayout;
 
 
         public ViewHolder(@NonNull View View) {
@@ -105,12 +127,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
 
-//        public void setData(int image, String name, String price, String category, float rating) { //, int rating
-//            shirtImage.setImageResource(image);
-//            shirtName.setText(name);
-//            shirtPrice.setText(price);
-//            shirtCategory.setText(category);
-//            shirtRating.setRating(rating);
-//        }
     }
 }

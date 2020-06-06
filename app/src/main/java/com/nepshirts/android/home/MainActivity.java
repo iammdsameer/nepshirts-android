@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
     private ImageView profileIcon;
     private FirebaseAuth.AuthStateListener mauthAuthStateListener;
-    private boolean isInFront = false;
     private FirebaseUser user;
 
     @Override
@@ -52,19 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseAuth.getInstance().addAuthStateListener(mauthAuthStateListener);
-//    }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mauthAuthStateListener != null) {
-//            FirebaseAuth.getInstance().removeAuthStateListener(mauthAuthStateListener);
-//        }
-//    }
     private void viewProfile() {
 
                 if (user == null) {
@@ -87,13 +73,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Toast.makeText(this, "Paused", Toast.LENGTH_LONG).show();
-        isInFront = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        isInFront = true;
     }
 
 
@@ -132,12 +116,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-//    public void viewProfile() {
-//        if (isInFront = true) {
-//            Intent intent = new Intent(getBaseContext(), UserProfile.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
 
 }

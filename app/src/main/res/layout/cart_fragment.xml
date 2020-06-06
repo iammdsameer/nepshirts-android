@@ -140,11 +140,12 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
        android:layout_below="@+id/you_might_like_these"
         android:layout_marginTop="15dp"
         android:id="@+id/high_rated_items"
+        android:layout_centerHorizontal="true"
         />
     <TextView
         android:layout_marginTop="30dp"
