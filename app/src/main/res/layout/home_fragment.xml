@@ -67,6 +67,25 @@
                 layout="@layout/category_list" />
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/you_might_like_these"
+            android:layout_below="@+id/frame_id"
+            android:layout_marginStart="30sp"
+            android:layout_marginTop="15sp"
+            android:text="You Might Also like these"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/you_might_like_these"
+            android:layout_marginTop="15dp"
+            android:id="@+id/high_rated_items"
+            android:layout_gravity="center"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"

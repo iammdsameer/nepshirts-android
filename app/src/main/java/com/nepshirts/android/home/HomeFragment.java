@@ -48,7 +48,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private SliderView sliderView;
     private List<SliderModel> images;
     private CardView cardView;
-
+    private RecyclerView highRatedItems;
+    ArrayList<ShirtModel> ratedItems = new ArrayList<>();
 
     @Nullable
     @Override
@@ -66,20 +67,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView = view.findViewById(R.id.homepage_products);
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
+        highRatedItems = view.findViewById(R.id.high_rated_items);
+
         images = new ArrayList<SliderModel>();
         sliderView = view.findViewById(R.id.home_header_image);
         images.add(new SliderModel(R.drawable.header1));
         images.add(new SliderModel(R.drawable.header2));
         images.add(new SliderModel(R.drawable.header5));
 
-        sliderView.setSliderAdapter(new ImageSliderAdapter(getActivity(),images));
+        sliderView.setSliderAdapter(new ImageSliderAdapter(getActivity(), images));
 
+        viewMore.setOnClickListener(this);
+        humour.setOnClickListener(this);
+        programming.setOnClickListener(this);
+        event.setOnClickListener(this);
+        fandom.setOnClickListener(this);
 
+        return view;
+    }
 
-
-
-
-
+    @Override
+    public void onStart() {
+        super.onStart();
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -91,15 +100,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                         }
                         for (ShirtModel shirt : tshirts) {
-                            int initialPrice  = Integer.parseInt(shirt.getPrice());
+                            int initialPrice = Integer.parseInt(shirt.getPrice());
                             int discountPrice = Integer.parseInt(shirt.getDisPrice());
                             try {
-                                if (discountPrice<initialPrice){
+                                if (discountPrice < initialPrice) {
                                     onSaleTshirts.add(shirt);
                                 }
                             } catch (Exception e) {
                                 //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
                             }
+                        }
+                        int i =1;
+                        for (ShirtModel shirt : tshirts) {
+                            int rating  = Integer.parseInt(shirt.getRating());
+                            Toast.makeText(getActivity(), "Rating: "+rating, Toast.LENGTH_SHORT).show();
+
+                            if (rating>=4){
+                                ratedItems.add(shirt);
+                                Toast.makeText(getActivity(), "Added"+i, Toast.LENGTH_SHORT).show();
+                                i++;
+                            }
+
                         }
 
 
@@ -133,20 +154,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
         }
-
-        viewMore.setOnClickListener(this);
-        humour.setOnClickListener(this);
-        programming.setOnClickListener(this);
-        event.setOnClickListener(this);
-        fandom.setOnClickListener(this);
-
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
 
     }
 
@@ -190,15 +197,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void initRecyclerView() {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(randomShirts, getActivity());
         recyclerView.setAdapter(adpt);
-        RecyclerViewAdapter onSale = new RecyclerViewAdapter(onSaleTshirts,getActivity());
-        onSaleItems.setAdapter(onSale);
 
-//        CardView.LayoutParams params = new CardView.LayoutParams(
-//                CardView.LayoutParams.WRAP_CONTENT,
-//                CardView.LayoutParams.WRAP_CONTENT
-//        );
-//        params.setMargins(10, 10, 10, 10);
-//        cardView.setLayoutParams(params);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        RecyclerViewAdapter onSale = new RecyclerViewAdapter(onSaleTshirts, getActivity());
+        onSaleItems.setAdapter(onSale);
 
         onSaleItems.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false) {
 
@@ -208,7 +215,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false) {
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(ratedItems, getActivity());
+        highRatedItems.setAdapter(adapter);
+        Log.d(TAG, "initRecyclerView: " + ratedItems.toString());
+
+        highRatedItems.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
             @Override
             public boolean canScrollVertically() {
                 return false;
