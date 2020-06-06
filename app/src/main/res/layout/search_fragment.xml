@@ -35,7 +35,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_results"
-        layout="@layout/category_list"/>
+        layout="@layout/category_list"
+        android:id="@+id/categories"
+        />
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categories"
+        android:layout_centerHorizontal="true"
+        android:text="@string/you_are_at_the_end_of_the_page"
+        android:layout_marginBottom="160dp"        />
 
 </RelativeLayout>
 </ScrollView>

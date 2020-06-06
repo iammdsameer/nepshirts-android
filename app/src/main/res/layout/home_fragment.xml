@@ -2,11 +2,32 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.smarteist.autoimageslider.SliderView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:id="@+id/home_header_image"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderScrollTimeInSec="1"
+        app:sliderStartAutoCycle="true"
+        android:scrollIndicators="none"
+
+
+        app:sliderAutoCycleDirection="left"
+
+        android:layout_centerHorizontal="true"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/home_header_image"
         android:id="@+id/homepage_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -31,8 +52,20 @@
         <include
             android:id="@+id/category_id"
             layout="@layout/category_list" />
-
     </FrameLayout>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frame_id"
+        android:id="@+id/on_sale_items"
+        />
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/on_sale_items"
+            android:layout_centerHorizontal="true"
+            android:text="@string/you_are_at_the_end_of_the_page"
+            android:layout_marginBottom="160dp"            />
 </RelativeLayout>
 </ScrollView>

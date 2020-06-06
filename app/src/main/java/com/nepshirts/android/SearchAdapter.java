@@ -41,12 +41,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
         try {
             int percent = (discPrice * 100) / initialPrice;
             if(percent <=0){
+                holder.price2.setText(list.get(i).getPrice());
+                holder.price1.setVisibility(View.GONE);
                 holder.percentage.setVisibility(View.GONE);
             }else if(percent ==100){
                 holder.percentage.setText("FREE!!");
+                holder.price1.setText(list.get(i).getPrice());
+                holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.price2.setText(list.get(i).getDisPrice());
             }else {
                 String p = String.valueOf(percent);
                 holder.percentage.setText(p + "%" + " Discount");
+                holder.price1.setText(list.get(i).getPrice());
+                holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.price2.setText(list.get(i).getDisPrice());
             }
         }catch (Exception e){
 
@@ -58,10 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
 
         holder.title.setText(list.get(i).getProductNames());
 
-        holder.price1.setText(list.get(i).getPrice());
-        holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        holder.price2.setText(list.get(i).getDisPrice());
 
 
         holder.category.setText(list.get(i).getProductCategory());

@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+
+        android:id="@+id/category_header_image"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/category_header_image"
+        android:layout_marginTop="15dp"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycler_view"
+        android:layout_centerHorizontal="true"
+        android:text="@string/you_are_at_the_end_of_the_page"
+        android:layout_marginBottom="160dp"
+        />
 
 </RelativeLayout>

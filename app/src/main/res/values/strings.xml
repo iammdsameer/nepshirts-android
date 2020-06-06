@@ -23,5 +23,6 @@
     <string name="type_product_name">Type product name</string>
     <string name="search">Search</string>
     <string name="search_icon">Search Icon</string>
+    <string name="you_are_at_the_end_of_the_page">You are at the end of the page</string>
 
 </resources>

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +36,7 @@ public class CategoryFragment extends Fragment {
     private static final int NUM_COLUMNS = 2; //staggered vs normal
 
     List<ShirtModel> modelClassList = new ArrayList<>();
+    private ImageView headerImage;
 
     private DatabaseReference ref;
     private RecyclerView recyclerView;
@@ -45,7 +47,7 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
-
+    headerImage = view.findViewById(R.id.category_header_image);
         String category = getArguments().getString("category");
 
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -68,6 +70,15 @@ public class CategoryFragment extends Fragment {
                         ArrayList<ShirtModel> filteredList = new ArrayList<>();
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
                             if(res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
+                                if(category.toLowerCase().equals("programming") ){
+                                    headerImage.setImageResource(R.drawable.header4);
+                                }else if(category.toLowerCase().equals("patriotic") ){
+                                    headerImage.setImageResource(R.drawable.header3);
+                                }else if(category.toLowerCase().equals("humour") ){
+                                    headerImage.setImageResource(R.drawable.header6);
+                                }else if(category.toLowerCase().equals("fandom") ){
+                                    headerImage.setImageResource(R.drawable.header8);
+                                }
 
                                 filteredList.add(res.getValue(ShirtModel.class));
                             }

@@ -21,13 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.AllProductsFragment;
+import com.nepshirts.android.ImageSliderAdapter;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
-import com.nepshirts.android.home.CategoryFragment;
 import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.SliderModel;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -39,6 +40,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private DatabaseReference ref;
     ArrayList<ShirtModel> randomShirts = new ArrayList<>();
     private RecyclerView recyclerView;
+    ArrayList<ShirtModel> onSaleTshirts = new ArrayList<>();
+    private RecyclerView onSaleItems;
+    private SliderView sliderView;
+    private List<SliderModel> images;
 
 
     @Nullable
@@ -52,22 +57,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageView programming = view.findViewById(R.id.category_programming);
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
+        onSaleItems = view.findViewById(R.id.on_sale_items);
 
         recyclerView = view.findViewById(R.id.homepage_products);
         ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
-        viewMore.setOnClickListener(this);
-        humour.setOnClickListener(this);
-        programming.setOnClickListener(this);
-        event.setOnClickListener(this);
-        fandom.setOnClickListener(this);
+        images = new ArrayList<SliderModel>();
+        sliderView = view.findViewById(R.id.home_header_image);
+        images.add(new SliderModel(R.drawable.header1));
+        images.add(new SliderModel(R.drawable.header2));
+        images.add(new SliderModel(R.drawable.header5));
 
-        return view;
-    }
+        sliderView.setSliderAdapter(new ImageSliderAdapter(getActivity(),images));
 
-    @Override
-    public void onStart() {
-        super.onStart();
+
+
+
+
+
+
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -76,7 +84,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
                             tshirts.add(res.getValue(ShirtModel.class));
+
                         }
+                        for (ShirtModel shirt : tshirts) {
+                            int initialPrice  = Integer.parseInt(shirt.getPrice());
+                            int discountPrice = Integer.parseInt(shirt.getDisPrice());
+                            try {
+                                if (discountPrice<initialPrice){
+                                    onSaleTshirts.add(shirt);
+                                }
+                            } catch (Exception e) {
+                                //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
                         Log.d(TAG, "onDataChange: " + tshirts);
                         try {
                             List<Integer> nums = new ArrayList<>();
@@ -107,6 +129,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
         }
+
+        viewMore.setOnClickListener(this);
+        humour.setOnClickListener(this);
+        programming.setOnClickListener(this);
+        event.setOnClickListener(this);
+        fandom.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
 
     }
 
@@ -150,6 +186,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void initRecyclerView() {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(randomShirts, getActivity());
         recyclerView.setAdapter(adpt);
+        RecyclerViewAdapter onSale = new RecyclerViewAdapter(onSaleTshirts,getActivity());
+        onSaleItems.setAdapter(onSale);
+
+        onSaleItems.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
             @Override
             public boolean canScrollVertically() {
