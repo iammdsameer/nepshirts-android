@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.7'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -54,14 +55,15 @@ dependencies {
     //material design dependency
     implementation 'com.google.android.material:material:1.1.0'
 
-    //firesabe UI
-    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
 
     //slider dependency
     implementation 'com.r0adkll:slidableactivity:2.1.0'
 
     // Image Carousel
     implementation 'com.github.smarteist:autoimageslider:1.3.7-appcompat'
+
+    // Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
 
 
 }
