@@ -48,6 +48,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private DatabaseReference ref;
     ArrayList<ShirtModel> allTshirts = new ArrayList<>();
     ArrayList<ShirtModel> ratedItems = new ArrayList<>();
+    private TextView subtotalView, totalView;
 
     @Nullable
     @Override
@@ -99,6 +100,17 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
                 }
             });
+
+            subtotalView = view.findViewById(R.id.subtotal_price);
+            totalView = view.findViewById(R.id.total_price);
+
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("priceInfo", Context.MODE_PRIVATE);
+            String subTotal = sharedPreferences.getString("cartPrice", "0");
+            subtotalView.setText("Rs." + subTotal);
+
+            int grandTotal = Integer.parseInt(subTotal) + 150;
+
+            totalView.setText("Rs." + Integer.toString(grandTotal));
         }
 
         humour.setOnClickListener(this);
@@ -112,10 +124,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(ratedItems, getActivity());
         high_rated.setAdapter(adpt);
         Log.d(TAG, "initRecyclerView: "+ ratedItems.toString());
-        CartAdapter cartAdpt = new CartAdapter(viewCart(),getActivity());
-        recyclerView.setAdapter(cartAdpt);
-
-
+        if (viewCart() != null) {
+            CartAdapter cartAdpt = new CartAdapter(viewCart(), getActivity());
+            recyclerView.setAdapter(cartAdpt);
+        } else {
+            Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
+        }
 
 
 
