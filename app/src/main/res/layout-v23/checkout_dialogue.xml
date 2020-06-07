@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_centerInParent="true">
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#EEffffff"
+        android:background="@drawable/layout_border"
+        >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/confirmation_message"
+        android:text="Would you like to continue with the products in cart. With the click you agree will all the terms and condition to buy the product listed."
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirmation_message"
+            android:layout_marginTop="15sp"
+            android:text="Payable Amoun: Rs. 15000"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/confirm_checkout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="255dp"
+        android:layout_height="40dp"
+        android:background="@color/lightBlue"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="addToCart"
+        style="?android:attr/borderlessButtonStyle"/>
+    </RelativeLayout>
+</RelativeLayout>

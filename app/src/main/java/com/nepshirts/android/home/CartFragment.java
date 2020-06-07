@@ -1,12 +1,14 @@
 package com.nepshirts.android.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -19,6 +21,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +33,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nepshirts.android.AllProductsFragment;
 import com.nepshirts.android.CartAdapter;
+import com.nepshirts.android.CheckOut;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
 import com.nepshirts.android.SearchAdapter;
@@ -49,6 +55,11 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     ArrayList<ShirtModel> allTshirts = new ArrayList<>();
     ArrayList<ShirtModel> ratedItems = new ArrayList<>();
     private TextView subtotalView, totalView;
+    Button checkout_button;
+    private  DatabaseReference mDatabase,userRef;
+    private String name,city,street,phone;
+  
+    FirebaseUser user;
 
     @Nullable
     @Override
@@ -57,11 +68,30 @@ public class CartFragment extends Fragment implements View.OnClickListener {
        textView = view.findViewById(R.id.test);
        recyclerView = view.findViewById(R.id.cart_items);
        high_rated = view.findViewById(R.id.high_rated_items);
-
+        checkout_button = view.findViewById(R.id.check_out_button);
         ImageView humour = view.findViewById(R.id.category_humour);
         ImageView programming = view.findViewById(R.id.category_programming);
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                name = dataSnapshot.child("fullName").getValue().toString();
+                city = dataSnapshot.child("city").getValue().toString();
+                street = dataSnapshot.child("street").getValue().toString();
+                phone = dataSnapshot.child("userPhoneNumber").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         viewCart();
 
@@ -130,6 +160,18 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         } else {
             Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
         }
+        checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user !=null ){
+
+                    checkout();
+                }else {
+                    Toast.makeText(getActivity(), "Please Sign In to  Checkout", Toast.LENGTH_SHORT).show();
+                }
+               
+            }
+        });
 
 
 
@@ -142,6 +184,31 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
 //        SearchAdapter searchAdapter = new SearchAdapter(getActivity(), viewCart());
 
+    }
+
+
+
+    private void checkout() {
+
+        for(OrderModel om: viewCart()){
+            try {
+                mDatabase.child("Orders").child(om.getProductId()).child("productId").setValue(om.getProductId());
+                mDatabase.child("Orders").child(om.getProductId()).child("userName").setValue(name);
+                mDatabase.child("Orders").child(om.getProductId()).child("userId").setValue(om.getUserId());
+                mDatabase.child("Orders").child(om.getProductId()).child("productColor").setValue(om.getColor());
+                mDatabase.child("Orders").child(om.getProductId()).child("size").setValue(om.getSize());
+                mDatabase.child("Orders").child(om.getProductId()).child("quantity").setValue(om.getQuantity());
+                mDatabase.child("Orders").child(om.getProductId()).child("city").setValue(city);
+                mDatabase.child("Orders").child(om.getProductId()).child("street").setValue(street);
+                mDatabase.child("Orders").child(om.getProductId()).child("phone").setValue(phone);
+
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+        }
+
+        Toast.makeText(getActivity(), "Done", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), CheckOut.class));
     }
 
     @Override
