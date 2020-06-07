@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageView programming = view.findViewById(R.id.category_programming);
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
+
         onSaleItems = view.findViewById(R.id.on_sale_items);
 
         recyclerView = view.findViewById(R.id.homepage_products);

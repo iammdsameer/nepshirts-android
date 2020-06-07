@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nepshirts.android.AllProductsFragment;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
 import com.nepshirts.android.models.ShirtModel;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "CartFragment";
     private RecyclerView recyclerView;
@@ -47,6 +49,11 @@ public class CartFragment extends Fragment {
        textView = view.findViewById(R.id.test);
        recyclerView = view.findViewById(R.id.cart_items);
        high_rated = view.findViewById(R.id.high_rated_items);
+
+        ImageView humour = view.findViewById(R.id.category_humour);
+        ImageView programming = view.findViewById(R.id.category_programming);
+        ImageView event = view.findViewById(R.id.category_event);
+        ImageView fandom = view.findViewById(R.id.category_fandom);
 
 
        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
@@ -92,6 +99,11 @@ public class CartFragment extends Fragment {
             });
         }
 
+        humour.setOnClickListener(this);
+        programming.setOnClickListener(this);
+        event.setOnClickListener(this);
+        fandom.setOnClickListener(this);
+
        return view;
     }
     private void initRecyclerView() {
@@ -107,7 +119,42 @@ public class CartFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onClick(View v) {
 
+        Fragment currentFragment = null;
+        Bundle args = new Bundle();
+        switch (v.getId()) {
+            case R.id.all_products:
+                currentFragment = new AllProductsFragment();
+                break;
+            case R.id.category_humour:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "humour");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_event:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "event");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_fandom:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "fandom");
+                currentFragment.setArguments(args);
+                break;
+
+            case R.id.category_programming:
+                currentFragment = new CategoryFragment();
+                args.putString("category", "programming");
+                currentFragment.setArguments(args);
+                break;
+        }
+        getFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
+
+    }
 
     public void deleteFromCart(View view) {
         //TODO
