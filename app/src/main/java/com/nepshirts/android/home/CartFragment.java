@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nepshirts.android.AllProductsFragment;
+import com.nepshirts.android.CartAdapter;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
 import com.nepshirts.android.SearchAdapter;
@@ -84,6 +87,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
 
                     }
+
                     initRecyclerView();
 
 
@@ -108,6 +112,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(ratedItems, getActivity());
         high_rated.setAdapter(adpt);
         Log.d(TAG, "initRecyclerView: "+ ratedItems.toString());
+        CartAdapter cartAdpt = new CartAdapter(viewCart(),getActivity());
+        recyclerView.setAdapter(cartAdpt);
+
+
+
+
 
         high_rated.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
             @Override

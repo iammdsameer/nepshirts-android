@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:elevation="10sp"
     android:outlineSpotShadowColor="@color/lightGrey"
+    android:layout_margin="15sp"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,29 +30,52 @@
             android:id="@+id/cart_item_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cart_item_title"
-            android:layout_toRightOf="@id/cart_item_image"
+            android:layout_marginTop="3sp"
+            android:layout_marginBottom="2sp"
+            android:layout_marginLeft="130sp"
+            android:layout_toRightOf="@id/cart_item_title"
             android:text="Programming"
             android:textSize="12sp"
             />
         <TextView
-            android:id="@+id/cart_item_price"
-            android:layout_below="@+id/cart_item_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cart_item_category"
             android:layout_toRightOf="@id/cart_item_image"
-            android:layout_marginTop="25sp"
+            android:id="@id/cart_item_size"
+            android:text="Size: XL"
+            />
+        <TextView
+
+            android:id="@+id/cart_item_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity: "
+            android:layout_below="@+id/cart_item_size"
+            android:layout_toRightOf="@id/cart_item_image"
+            />
+        <TextView
+            android:id="@+id/cart_item_price"
+            android:layout_below="@+id/cart_item_quantity"
+            android:layout_toRightOf="@id/cart_item_image"
+            android:layout_marginTop="5sp"
             android:text="Rs. 1500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
-        <ImageButton
+
+        <RadioButton
+            android:id="@+id/cart_tshirt_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/cart_item_title"
             android:layout_marginStart="150sp"
             android:layout_below="@id/cart_item_category"
-            android:src="@drawable/ic_delete"
             android:background="@color/white"
-            android:onClick="deleteFromCart"
+      android:backgroundTint="@color/lightGreen"
+            android:elevation="5sp"
+            android:checked="true"
+            android:buttonTint="@color/white"
 
             />
 
