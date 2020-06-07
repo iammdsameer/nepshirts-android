@@ -22,11 +22,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nepshirts.android.AllProductsFragment;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
+import com.nepshirts.android.SearchAdapter;
+import com.nepshirts.android.models.OrderModel;
 import com.nepshirts.android.models.ShirtModel;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -35,7 +40,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "CartFragment";
     private RecyclerView recyclerView;
-    ArrayList<ShirtModel> cartList;
     TextView textView;
     private  RecyclerView high_rated;
     private DatabaseReference ref;
@@ -55,10 +59,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
 
+        viewCart();
 
-       SharedPreferences sharedPreferences = getActivity().getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
-       String test = sharedPreferences.getString("name","");
-       textView.setText(test);
        ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
         if (ref != null) {
@@ -70,16 +72,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
                             allTshirts.add(res.getValue(ShirtModel.class));
                         }
-                        int i =1;
 
                         for (ShirtModel shirt : allTshirts) {
                             int rating  = Integer.parseInt(shirt.getRating());
-                            Toast.makeText(getActivity(), "Rating: "+rating, Toast.LENGTH_SHORT).show();
 
                                 if (rating>=4){
                                     ratedItems.add(shirt);
-                                    Toast.makeText(getActivity(), "Added"+i, Toast.LENGTH_SHORT).show();
-                                    i++;
                                 }
 
                         }
@@ -117,6 +115,9 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+
+//        SearchAdapter searchAdapter = new SearchAdapter(getActivity(), viewCart());
+
     }
 
     @Override
@@ -154,6 +155,17 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         }
         getFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
 
+    }
+
+    public ArrayList<OrderModel> viewCart() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cartItems", "");
+        Type type = new TypeToken<ArrayList<OrderModel>>() {
+        }.getType();
+        ArrayList<OrderModel> cartList = gson.fromJson(json, type);
+
+        return cartList;
     }
 
     public void deleteFromCart(View view) {

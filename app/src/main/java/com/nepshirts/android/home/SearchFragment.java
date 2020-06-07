@@ -27,6 +27,7 @@ import com.nepshirts.android.models.ShirtModel;
 import com.nepshirts.android.SearchAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "SearchFragment";
@@ -34,7 +35,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     SearchView searchView;
     private EditText search_text;
     private DatabaseReference ref;
-    ArrayList<ShirtModel> list;
+    List<ShirtModel> list;
 
 
     @Nullable

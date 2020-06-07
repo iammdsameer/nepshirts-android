@@ -111,15 +111,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        int i =1;
                         for (ShirtModel shirt : tshirts) {
                             int rating  = Integer.parseInt(shirt.getRating());
-                            Toast.makeText(getActivity(), "Rating: "+rating, Toast.LENGTH_SHORT).show();
 
                             if (rating>=4){
                                 ratedItems.add(shirt);
-                                Toast.makeText(getActivity(), "Added"+i, Toast.LENGTH_SHORT).show();
-                                i++;
                             }
 
                         }

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_centerInParent="true">
     <RelativeLayout
         android:layout_width="290dp"
         android:layout_height="180dp"
@@ -23,7 +23,8 @@
         android:layout_height="40dp"
         android:spinnerMode="dropdown"
         android:layout_marginRight="15dp"
-        android:background="@drawable/layout_border"/>
+        android:background="@drawable/layout_border"
+        android:entries="@array/spinnerColor" />
 
     <Spinner
         android:id="@+id/size_spinner"
@@ -32,16 +33,19 @@
         android:spinnerMode="dropdown"
         android:background="@drawable/layout_border"
         android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/color_spinner"/>
+        android:layout_below="@+id/color_spinner"
+        android:layout_toRightOf="@+id/color_spinner"
+        android:entries="@array/spinnerSize" />
 
-    <Spinner
-        android:id="@+id/quantity_spinner"
+        <EditText
+            android:inputType="number"
+            android:id="@+id/product_quantity"
         android:layout_width="110dp"
         android:layout_height="40dp"
-        android:spinnerMode="dropdown"
         android:background="@drawable/layout_border"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/color_spinner"/>
+
     </RelativeLayout>
 
     <Button

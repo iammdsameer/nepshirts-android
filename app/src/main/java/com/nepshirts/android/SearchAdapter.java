@@ -14,19 +14,29 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nepshirts.android.models.OrderModel;
 import com.nepshirts.android.models.ShirtModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchViewHolder> {
-        ArrayList<ShirtModel> list;
+    List<ShirtModel> list;
+    ArrayList<OrderModel> cartlist;
         private Context mContext;
 
-    public SearchAdapter(ArrayList<ShirtModel>list, Context mContext){
+    public SearchAdapter(List<ShirtModel> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
+
+    public SearchAdapter(ArrayList<OrderModel> cartlist, Context mContext) {
+        this.cartlist = cartlist;
+        this.mContext = mContext;
+    }
+
+
     @NonNull
     @Override
     public searchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

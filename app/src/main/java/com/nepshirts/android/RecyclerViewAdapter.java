@@ -14,10 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nepshirts.android.models.OrderModel;
 import com.nepshirts.android.models.ShirtModel;
 import com.nepshirts.android.utils.Constant;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -94,6 +96,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("Price",list.get(i).getPrice());
                 intent.putExtra("Category",list.get(i).getProductCategory());
                 intent.putExtra("Rating",list.get(i).getRating());
+                intent.putExtra("Id", list.get(i).getId());
 
                 mContext.startActivity(intent);
 
