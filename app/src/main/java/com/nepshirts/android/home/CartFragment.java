@@ -244,7 +244,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                 currentFragment.setArguments(args);
                 break;
         }
-        getFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
 
     }
 

@@ -51,8 +51,6 @@ public class CategoryFragment extends Fragment {
         String category = getArguments().getString("category");
 
         recyclerView = view.findViewById(R.id.recycler_view);
-//        String urlss= "https://res.cloudinary.com/nepshirts/image/upload/$wpsize_!_cld_full!,w_1024,h_1024,c_scale/v1589152475/wp-content/uploads/AF365BA9-82C9-432F-9AD6-37B5690BD2A1-1024x1024-1.jpeg";
-//        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
 
         return view;
     }

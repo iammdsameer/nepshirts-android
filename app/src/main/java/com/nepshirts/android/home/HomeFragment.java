@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private CardView cardView;
     private RecyclerView highRatedItems;
     ArrayList<ShirtModel> ratedItems = new ArrayList<>();
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Nullable
     @Override
@@ -84,11 +86,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         event.setOnClickListener(this);
         fandom.setOnClickListener(this);
 
+
         return view;
+
     }
 
     @Override
     public void onStart() {
+        shimmerFrameLayout = getActivity().findViewById(R.id.shimmer_frame_id);
+        shimmerFrameLayout.startShimmer();
         super.onStart();
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
@@ -141,7 +147,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                     initRecyclerView();
 
-
+                    shimmerFrameLayout.hideShimmer();
                 }
 
 
@@ -187,7 +193,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 currentFragment.setArguments(args);
                 break;
         }
-        getFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
 
     }
 

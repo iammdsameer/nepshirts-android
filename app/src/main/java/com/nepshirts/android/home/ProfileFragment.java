@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,10 +47,12 @@ public class ProfileFragment extends Fragment{
 
     private Button logoutButton;
     private Button updateButton;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         setupFirebaseListener();
 
@@ -135,6 +138,7 @@ public class ProfileFragment extends Fragment{
 
                 }
 
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
@@ -169,8 +173,10 @@ public class ProfileFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-
+        shimmerFrameLayout = getActivity().findViewById(R.id.shimmer_frame_id);
+        shimmerFrameLayout.startShimmer();
         FirebaseAuth.getInstance().addAuthStateListener(mauthAuthStateListener);
+
     }
 
     @Override

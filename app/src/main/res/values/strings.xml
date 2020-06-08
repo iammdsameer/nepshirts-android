@@ -25,5 +25,7 @@
     <string name="search_icon">Search Icon</string>
     <string name="you_are_at_the_end_of_the_page">You are at the end of the page</string>
     <string name="checkout_message">Please try to keep change duuring delivery. The purchase made is non refundable. Products can be exchanged if notable quality fault found</string>
+    <string name="spinnerColor">Color</string>
+    <string name="spinnerSize">Size</string>
 
 </resources>

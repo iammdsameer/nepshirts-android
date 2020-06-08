@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     ProfileFragment profile = new ProfileFragment();
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_id, profile);;
+                    transaction.replace(R.id.shimmer_frame_id, profile);
+                    ;
                     transaction.commit();
                     bottomNavigation.setVisibility(View.GONE);
                 }
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_id, homeFragment, "home_fragment" );
+        transaction.replace(R.id.shimmer_frame_id, homeFragment, "home_fragment");
         //back stack
         transaction.commit();
     }
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     //for displaying frag
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_id, currentFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
                     return true;
                 }
             };

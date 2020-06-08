@@ -93,6 +93,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
                 intent.putExtra("Category",list.get(i).getProductCategory());
                 intent.putExtra("Rating",list.get(i).getRating());
 
+
                 mContext.startActivity(intent);
             }
         });

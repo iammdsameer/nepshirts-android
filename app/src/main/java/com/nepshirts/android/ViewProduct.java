@@ -103,8 +103,8 @@ public class ViewProduct extends AppCompatActivity {
                 final Dialog dialogBox = new Dialog(ViewProduct.this, android.R.style.Theme_Black_NoTitleBar);
                 dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
                 dialogBox.setContentView(R.layout.confirm_dialogue);
-                dialogBox.setCanceledOnTouchOutside(true); // todo
                 dialogBox.setCancelable(true);
+                dialogBox.setCanceledOnTouchOutside(true); // todo
                 dialogBox.show();
 
                 colorSpinner = dialogBox.findViewById(R.id.color_spinner);
@@ -184,44 +184,6 @@ public class ViewProduct extends AppCompatActivity {
         return cartList;
 
     }
-
-//    private void addToCart(final String id){
-//
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if(dataSnapshot.exists()){
-//                    user = FirebaseAuth.getInstance().getCurrentUser();
-//                    if (user != null){
-//                        String userId = user.getUid();
-//                        String productKey = dataSnapshot.getKey();
-//
-//                        OrderModel order = new OrderModel(productKey, userId, );
-//
-//
-//                        orderList.add();
-//
-//
-//                        Gson gson = new Gson();
-//                        String jsonString = gson.toJson(cartList);
-//
-//                        SharedPreferences sharedPreferences = getSharedPreferences("cartInfo", Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putString("cartItems", jsonString);
-//                        editor.apply();
-//                    }else {
-//                        Toast.makeText(ViewProduct.this, "Login to add products to cart!", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-    //todo
 
 
 }

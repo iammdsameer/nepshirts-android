@@ -10,13 +10,15 @@
     <include
         layout="@layout/main_toolbar"/>
 
-    <FrameLayout
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_below="@+id/toolbar_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/frame_id">
+        android:id="@+id/shimmer_frame_id"
+        app:shimmer_auto_start="false">
 
-    </FrameLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <include
         layout="@layout/bottom_navigation"/>
