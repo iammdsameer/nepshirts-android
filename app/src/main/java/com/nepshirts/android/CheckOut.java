@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.user.LoginActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class CheckOut extends AppCompatActivity {
     private TextView totalAmount,delivery_date,shippingAddress,userName;
@@ -32,13 +38,27 @@ public class CheckOut extends AppCompatActivity {
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
-        LocalDate date = LocalDate.now();
-        final LocalDate shippingDate = date.plusDays(5);
+
+
+
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date todayDate = new Date();
+
+
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(todayDate);
+        c.add(Calendar.DATE, 5);
+        dt = c.getTime();
+
+        final String shippingDate = currentDate.format(dt);
 
         totalAmount = findViewById(R.id.payableAmount);
         delivery_date = findViewById(R.id.deliveryDate);
@@ -49,6 +69,7 @@ public class CheckOut extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
         if (user != null) {
+
 
             ref.addValueEventListener(new ValueEventListener() {
                 @Override

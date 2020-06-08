@@ -192,15 +192,18 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         for(OrderModel om: viewCart()){
             try {
-                mDatabase.child("Orders").child(om.getProductId()).child("productId").setValue(om.getProductId());
-                mDatabase.child("Orders").child(om.getProductId()).child("userName").setValue(name);
-                mDatabase.child("Orders").child(om.getProductId()).child("userId").setValue(om.getUserId());
-                mDatabase.child("Orders").child(om.getProductId()).child("productColor").setValue(om.getColor());
-                mDatabase.child("Orders").child(om.getProductId()).child("size").setValue(om.getSize());
-                mDatabase.child("Orders").child(om.getProductId()).child("quantity").setValue(om.getQuantity());
-                mDatabase.child("Orders").child(om.getProductId()).child("city").setValue(city);
-                mDatabase.child("Orders").child(om.getProductId()).child("street").setValue(street);
-                mDatabase.child("Orders").child(om.getProductId()).child("phone").setValue(phone);
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                String key = database.getReference().child("Orders").push().getKey();
+                mDatabase.child("Orders").child(key).child("productId").setValue(om.getProductId());
+                mDatabase.child("Orders").child(key).child("userName").setValue(name);
+                mDatabase.child("Orders").child(key).child("userId").setValue(om.getUserId());
+                mDatabase.child("Orders").child(key).child("productColor").setValue(om.getColor());
+                mDatabase.child("Orders").child(key).child("size").setValue(om.getSize());
+                mDatabase.child("Orders").child(key).child("quantity").setValue(om.getQuantity());
+                mDatabase.child("Orders").child(key).child("city").setValue(city);
+                mDatabase.child("Orders").child(key).child("street").setValue(street);
+                mDatabase.child("Orders").child(key).child("phone").setValue(phone);
 
             }catch (NullPointerException e){
                 e.printStackTrace();
