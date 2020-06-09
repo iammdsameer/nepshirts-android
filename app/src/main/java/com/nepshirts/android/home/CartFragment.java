@@ -3,6 +3,7 @@ package com.nepshirts.android.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,8 +58,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     ArrayList<ShirtModel> ratedItems = new ArrayList<>();
     private TextView subtotalView, totalView;
     Button checkout_button;
-    private  DatabaseReference mDatabase,userRef;
+    private  DatabaseReference mDatabase;
     private String name,city,street,phone;
+    private CardView calculationCard;
+    private TextView cartFragmetTitle;
   
     FirebaseUser user;
 
@@ -65,6 +69,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.cart_fragment,container,false);
+
        textView = view.findViewById(R.id.test);
        recyclerView = view.findViewById(R.id.cart_items);
        high_rated = view.findViewById(R.id.high_rated_items);
@@ -74,25 +79,26 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         ImageView event = view.findViewById(R.id.category_event);
         ImageView fandom = view.findViewById(R.id.category_fandom);
         user = FirebaseAuth.getInstance().getCurrentUser();
-
+        calculationCard = view.findViewById(R.id.calculation_card);
+        cartFragmetTitle = view.findViewById(R.id.cart_fragment_title);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+if(user!=null) {
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+    userRef.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            name = dataSnapshot.child("fullName").getValue().toString();
+            city = dataSnapshot.child("city").getValue().toString();
+            street = dataSnapshot.child("street").getValue().toString();
+            phone = dataSnapshot.child("userPhoneNumber").getValue().toString();
+        }
 
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name = dataSnapshot.child("fullName").getValue().toString();
-                city = dataSnapshot.child("city").getValue().toString();
-                street = dataSnapshot.child("street").getValue().toString();
-                phone = dataSnapshot.child("userPhoneNumber").getValue().toString();
-            }
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        }
+    });
+}
         viewCart();
 
        ref = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -158,6 +164,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             CartAdapter cartAdpt = new CartAdapter(viewCart(), getActivity());
             recyclerView.setAdapter(cartAdpt);
         } else {
+            calculationCard.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            checkout_button.setVisibility(View.GONE);
+            cartFragmetTitle.setText("YOUR CART IS EMPTY");
+            cartFragmetTitle.setTextColor(Color.parseColor("#FFCC00"));
+            cartFragmetTitle.setTextSize(20);
             Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
         }
         checkout_button.setOnClickListener(new View.OnClickListener() {
