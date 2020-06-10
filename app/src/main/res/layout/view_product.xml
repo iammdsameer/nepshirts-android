@@ -13,9 +13,26 @@
         android:layout_height="400dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/t1" />
+
+    <RatingBar
+        android:id="@+id/shirt_rating"
+        style="@android:style/Widget.Material.Light.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="213dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="14dp"
+        android:numStars="5"
+        android:rating="4"
+        android:stepSize="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/shirt_image"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -81,22 +98,21 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/shirt_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="55dp"
-                    android:text="Code"
-                    android:textColor="#000"
-                    android:textSize="25sp"/>
+                    <TextView
+                        android:id="@+id/shirt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="55dp"
+                        android:text="Code"
+                        android:textColor="#000"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/shirt_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category"
-                    android:textSize="16sp"
-                    />
+                    <TextView
+                        android:id="@+id/shirt_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -113,15 +129,33 @@
                         android:textColor="#FF3F3F"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/shirt_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:text="रु 500"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/shirt_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="6dp"
+                            android:gravity="right"
+                            android:text="रु 500"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/shirt_discounted"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="रु 500"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -177,11 +211,26 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="⚫Linus, linus linus 100 rupya 100 rupya\n⚫Linus, linus linus 100 rupya 100 rupya"
                 android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="30sp"
+                android:text="diefkej" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="30sp"
+                android:text="diefkej" />
         </LinearLayout>
 
     </ScrollView>
@@ -194,6 +243,7 @@
     <!--        app:layout_constraintEnd_toEndOf="parent"-->
     <!--        app:layout_constraintStart_toStartOf="parent" />-->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -205,15 +255,16 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"
-            android:text="Add to Cart"
-            android:background="#F1F1F1" />
+            android:background="#F1F1F1"
+            android:text="Add to Cart" />
 
         <Button
+            android:id="@+id/buy_now"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:background="#10C68A"
             android:text="Buy Now"
-            android:textColor="#fff"
-            android:background="#10C68A" />
+            android:textColor="#fff" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

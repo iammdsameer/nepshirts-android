@@ -33,7 +33,6 @@
         android:spinnerMode="dropdown"
         android:background="@drawable/layout_border"
         android:layout_marginLeft="15dp"
-        android:layout_below="@+id/color_spinner"
         android:layout_toRightOf="@+id/color_spinner"
         android:entries="@array/spinnerSize" />
 
@@ -44,6 +43,7 @@
         android:layout_height="40dp"
         android:background="@drawable/layout_border"
         android:layout_marginTop="15dp"
+            android:text="1"
         android:layout_below="@+id/color_spinner"/>
 
     </RelativeLayout>

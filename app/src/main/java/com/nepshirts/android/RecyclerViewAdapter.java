@@ -2,6 +2,7 @@ package com.nepshirts.android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +75,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //        holder.price1.setText(list.get(i).getPrice());
 //        holder.price1.setPaintFlags(holder.price1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        holder.shirtPrice.setText(list.get(i).getDisPrice());
+        holder.shirtPrice.setText("Rs. " + list.get(i).getDisPrice());
 //        holder.percentage.setText(p+"%"+" Discount");
+        holder.shirtDiscounted.setText(list.get(i).getPrice());
+        holder.shirtDiscounted.setPaintFlags(holder.shirtDiscounted.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.shirtCategory.setText(list.get(i).getProductCategory());
         holder.shirtRating.setRating(rating);
@@ -109,6 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView shirtPrice;
         private TextView shirtCategory;
         private RatingBar shirtRating;
+        private TextView shirtDiscounted;
         private CardView parentLayout;
 
 
@@ -117,6 +121,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             shirtImage = View.findViewById(R.id.shirt_image);
             shirtName = View.findViewById(R.id.shirt_name);
             shirtPrice = View.findViewById(R.id.shirt_price);
+            shirtDiscounted = View.findViewById(R.id.shirt_discounted);
             shirtCategory = View.findViewById(R.id.shirt_category);
             shirtRating = View.findViewById(R.id.shirt_rating);
             parentLayout = View.findViewById(R.id.parent_layout);
