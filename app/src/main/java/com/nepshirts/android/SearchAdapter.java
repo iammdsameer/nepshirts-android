@@ -15,18 +15,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nepshirts.android.models.OrderModel;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchViewHolder> {
-    List<ShirtModel> list;
+    List<ProductModel> list;
     ArrayList<OrderModel> cartlist;
         private Context mContext;
 
-    public SearchAdapter(List<ShirtModel> list, Context mContext) {
+    public SearchAdapter(List<ProductModel> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
@@ -87,20 +87,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ViewProduct.class);
-                intent.putExtra("Image",list.get(i).getImageUrl());
-                intent.putExtra("Name",list.get(i).getProductNames());
-                intent.putExtra("Price",list.get(i).getPrice());
-                intent.putExtra("Category",list.get(i).getProductCategory());
-                intent.putExtra("Rating",list.get(i).getRating());
-
+                intent.putExtra("selected_product", list.get(i));
 
                 mContext.startActivity(intent);
             }
         });
 
 //        holder.desc.setText(list.get(i).getDescription());
-
-
 
     }
 

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +27,7 @@ import com.nepshirts.android.AllProductsFragment;
 import com.nepshirts.android.ImageSliderAdapter;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 import com.nepshirts.android.models.SliderModel;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -40,17 +39,17 @@ import java.util.Random;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "HomeFragment";
-    ArrayList<ShirtModel> tshirts = new ArrayList<>();
+    ArrayList<ProductModel> tshirts = new ArrayList<>();
     private DatabaseReference ref;
-    ArrayList<ShirtModel> randomShirts = new ArrayList<>();
+    ArrayList<ProductModel> randomShirts = new ArrayList<>();
     private RecyclerView recyclerView;
-    ArrayList<ShirtModel> onSaleTshirts = new ArrayList<>();
+    ArrayList<ProductModel> onSaleTshirts = new ArrayList<>();
     private RecyclerView onSaleItems;
     private SliderView sliderView;
     private List<SliderModel> images;
     private CardView cardView;
     private RecyclerView highRatedItems;
-    ArrayList<ShirtModel> ratedItems = new ArrayList<>();
+    ArrayList<ProductModel> ratedItems = new ArrayList<>();
     private ShimmerFrameLayout shimmerFrameLayout;
 
     @Nullable
@@ -103,10 +102,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (dataSnapshot.exists()) {
 
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            tshirts.add(res.getValue(ShirtModel.class));
+                            tshirts.add(res.getValue(ProductModel.class));
 
                         }
-                        for (ShirtModel shirt : tshirts) {
+                        for (ProductModel shirt : tshirts) {
                             int initialPrice = Integer.parseInt(shirt.getPrice());
                             int discountPrice = Integer.parseInt(shirt.getDisPrice());
                             try {
@@ -117,7 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 //Toast.makeText(getActivity(), "No Results", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        for (ShirtModel shirt : tshirts) {
+                        for (ProductModel shirt : tshirts) {
                             int rating  = Integer.parseInt(shirt.getRating());
 
                             if (rating>=4){

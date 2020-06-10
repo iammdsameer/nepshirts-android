@@ -1,19 +1,13 @@
 package com.nepshirts.android;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +16,7 @@ public class SingleCategory extends AppCompatActivity {
 
     private static final int NUM_COLUMNS = 2; //staggered vs normal
 
-    List<ShirtModel> modelClassList = new ArrayList<>();
+    List<ProductModel> modelClassList = new ArrayList<>();
 
     private RecyclerView recyclerView;
 
@@ -35,7 +29,7 @@ public class SingleCategory extends AppCompatActivity {
 
         String shirtCategory = "Event";
         String urlss= "https://res.cloudinary.com/nepshirts/image/upload/$wpsize_!_cld_full!,w_1024,h_1024,c_scale/v1589152475/wp-content/uploads/AF365BA9-82C9-432F-9AD6-37B5690BD2A1-1024x1024-1.jpeg";
-        modelClassList.add(new ShirtModel("T1", "Visit Nepal 2020",urlss,"999", "5","Lorem Ipsum", "100",true,true,"Namaste"));
+        modelClassList.add(new ProductModel("T1", "Visit Nepal 2020", urlss, "999", "5", "Lorem Ipsum", "100", true, true, "Namaste"));
 
 //        modelClassList.add(new ShirtModel(R.drawable.t1, "Visit Nepal 2020","Rs. 999", "Event", 4));
 //        modelClassList.add(new ShirtModel(R.drawable.t1, "Binary","Rs. 699", "Programming", 3));

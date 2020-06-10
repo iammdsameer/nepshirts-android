@@ -1,6 +1,5 @@
 package com.nepshirts.android.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.AllProductsFragment;
 import com.nepshirts.android.R;
-import com.nepshirts.android.ViewProduct;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 import com.nepshirts.android.SearchAdapter;
 
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     SearchView searchView;
     private EditText search_text;
     private DatabaseReference ref;
-    List<ShirtModel> list;
+    List<ProductModel> list;
 
 
     @Nullable
@@ -135,7 +133,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     if (dataSnapshot.exists()) {
                         list = new ArrayList<>();
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            list.add(res.getValue(ShirtModel.class));
+                            list.add(res.getValue(ProductModel.class));
                         }
                         SearchAdapter adapter = new SearchAdapter(list, getActivity());
                         search_results.setAdapter(adapter);
@@ -174,8 +172,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void search(String str) {
-        ArrayList<ShirtModel> mList = new ArrayList<>();
-        for (ShirtModel shirt : list) {
+        ArrayList<ProductModel> mList = new ArrayList<>();
+        for (ProductModel shirt : list) {
             try {
                 if (shirt.getDescription().toLowerCase().contains(str.toLowerCase())
                         || shirt.getProductNames().toLowerCase().contains(str.toLowerCase()) ||

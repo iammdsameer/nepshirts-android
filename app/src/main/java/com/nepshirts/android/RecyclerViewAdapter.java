@@ -14,22 +14,20 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nepshirts.android.models.OrderModel;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 import com.nepshirts.android.utils.Constant;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG= "RecyclerViewAdapter";
 
-    private List<ShirtModel> list;
+    private List<ProductModel> list;
     private Context mContext;
 
-    public RecyclerViewAdapter(List<ShirtModel> modelClassList, Context mContext){
+    public RecyclerViewAdapter(List<ProductModel> modelClassList, Context mContext) {
         this.list = modelClassList;
         this.mContext = mContext;
     }
@@ -91,12 +89,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
 //                Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewProduct.class);
-                intent.putExtra("Image",img.toString());
-                intent.putExtra("Name",list.get(i).getProductNames());
-                intent.putExtra("Price",list.get(i).getPrice());
-                intent.putExtra("Category",list.get(i).getProductCategory());
-                intent.putExtra("Rating",list.get(i).getRating());
-                intent.putExtra("Id", list.get(i).getId());
+                intent.putExtra("selected_product", list.get(i));
 
                 mContext.startActivity(intent);
 

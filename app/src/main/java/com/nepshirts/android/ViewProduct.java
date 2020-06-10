@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nepshirts.android.R;
 import com.nepshirts.android.models.OrderModel;
+import com.nepshirts.android.models.ProductModel;
 import com.r0adkll.slidr.Slidr;
 import com.squareup.picasso.Picasso;
 
@@ -77,17 +78,16 @@ public class ViewProduct extends AppCompatActivity {
         });
 
         final Intent intent = getIntent();
+        ProductModel product = intent.getParcelableExtra("selected_product");
 
-        final String productId = intent.getExtras().getString("Id");
-//        ref = FirebaseDatabase.getInstance().getReference().child("Products").child(productId);
+        final String productId = product.getId();
 
+        final Uri imageUrl = Uri.parse(product.getImageUrl());
+        final String name = product.getProductNames();
 
-        final Uri imageUrl = Uri.parse(intent.getExtras().getString("Image"));
-        final String name = intent.getExtras().getString("Name");
-        final String price = intent.getExtras().getString("Price");
-        final String category = intent.getExtras().getString("Category");
+        final String price = product.getPrice();
+        final String category = product.getProductCategory();
 //        int rating = (int) intent.getExtras().getFloat("Rating");
-        final String image = intent.getExtras().getString("Image");
 
 
 //        shirtImage.setImageResource(image);

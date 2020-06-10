@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
 
     private static final int NUM_COLUMNS = 2; //staggered vs normal
 
-    List<ShirtModel> modelClassList = new ArrayList<>();
+    List<ProductModel> modelClassList = new ArrayList<>();
     private ImageView headerImage;
 
     private DatabaseReference ref;
@@ -75,10 +75,10 @@ public class CategoryFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     if (dataSnapshot.exists()) {
-                        ArrayList<ShirtModel> filteredList = new ArrayList<>();
+                        ArrayList<ProductModel> filteredList = new ArrayList<>();
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            if (res.getValue(ShirtModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
-                                filteredList.add(res.getValue(ShirtModel.class));
+                            if (res.getValue(ProductModel.class).getProductCategory().toLowerCase().equals(category.toLowerCase())) {
+                                filteredList.add(res.getValue(ProductModel.class));
                             }
                         }
 
@@ -102,7 +102,7 @@ public class CategoryFragment extends Fragment {
     }
 
 
-    private void initRecyclerView(ArrayList<ShirtModel> filteredList) {
+    private void initRecyclerView(ArrayList<ProductModel> filteredList) {
 //        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());

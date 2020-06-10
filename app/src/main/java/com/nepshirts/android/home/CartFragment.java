@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,14 +35,11 @@ import com.nepshirts.android.CartAdapter;
 import com.nepshirts.android.CheckOut;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
-import com.nepshirts.android.SearchAdapter;
 import com.nepshirts.android.models.OrderModel;
-import com.nepshirts.android.models.ShirtModel;
+import com.nepshirts.android.models.ProductModel;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class CartFragment extends Fragment implements View.OnClickListener {
 
@@ -54,8 +48,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     TextView textView;
     private  RecyclerView high_rated;
     private DatabaseReference ref;
-    ArrayList<ShirtModel> allTshirts = new ArrayList<>();
-    ArrayList<ShirtModel> ratedItems = new ArrayList<>();
+    ArrayList<ProductModel> allTshirts = new ArrayList<>();
+    ArrayList<ProductModel> ratedItems = new ArrayList<>();
     private TextView subtotalView, totalView;
     Button checkout_button;
     private  DatabaseReference mDatabase;
@@ -110,10 +104,10 @@ if(user!=null) {
                     if (dataSnapshot.exists()) {
 
                         for (DataSnapshot res : dataSnapshot.getChildren()) {
-                            allTshirts.add(res.getValue(ShirtModel.class));
+                            allTshirts.add(res.getValue(ProductModel.class));
                         }
 
-                        for (ShirtModel shirt : allTshirts) {
+                        for (ProductModel shirt : allTshirts) {
                             int rating  = Integer.parseInt(shirt.getRating());
 
                                 if (rating>=4){
