@@ -1,9 +1,11 @@
 package com.nepshirts.android.home;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,8 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +39,7 @@ import com.nepshirts.android.CartAdapter;
 import com.nepshirts.android.CheckOut;
 import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
+import com.nepshirts.android.ViewProduct;
 import com.nepshirts.android.models.OrderModel;
 import com.nepshirts.android.models.ProductModel;
 
@@ -46,27 +51,29 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "CartFragment";
     private RecyclerView recyclerView;
     TextView textView;
-    private  RecyclerView high_rated;
+    private RecyclerView high_rated;
     private DatabaseReference ref;
     ArrayList<ProductModel> allTshirts = new ArrayList<>();
     ArrayList<ProductModel> ratedItems = new ArrayList<>();
     private TextView subtotalView, totalView;
     Button checkout_button;
-    private  DatabaseReference mDatabase;
-    private String name,city,street,phone;
+    private DatabaseReference mDatabase;
+    private String name, city, street, phone;
     private CardView calculationCard;
     private TextView cartFragmetTitle;
-  
+
+    private int grandTotal;
+
     FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.cart_fragment,container,false);
+        View view = inflater.inflate(R.layout.cart_fragment, container, false);
 
-       textView = view.findViewById(R.id.test);
-       recyclerView = view.findViewById(R.id.cart_items);
-       high_rated = view.findViewById(R.id.high_rated_items);
+        textView = view.findViewById(R.id.test);
+        recyclerView = view.findViewById(R.id.cart_items);
+        high_rated = view.findViewById(R.id.high_rated_items);
         checkout_button = view.findViewById(R.id.check_out_button);
         ImageView humour = view.findViewById(R.id.category_humour);
         ImageView programming = view.findViewById(R.id.category_programming);
@@ -76,26 +83,26 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         calculationCard = view.findViewById(R.id.calculation_card);
         cartFragmetTitle = view.findViewById(R.id.cart_fragment_title);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-if(user!=null) {
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
-    userRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            name = dataSnapshot.child("fullName").getValue().toString();
-            city = dataSnapshot.child("city").getValue().toString();
-            street = dataSnapshot.child("street").getValue().toString();
-            phone = dataSnapshot.child("userPhoneNumber").getValue().toString();
-        }
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    name = dataSnapshot.child("fullName").getValue().toString();
+                    city = dataSnapshot.child("city").getValue().toString();
+                    street = dataSnapshot.child("street").getValue().toString();
+                    phone = dataSnapshot.child("userPhoneNumber").getValue().toString();
+                }
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                }
+            });
         }
-    });
-}
         viewCart();
 
-       ref = FirebaseDatabase.getInstance().getReference().child("Products");
+        ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
         if (ref != null) {
             ref.addValueEventListener(new ValueEventListener() {
@@ -108,11 +115,11 @@ if(user!=null) {
                         }
 
                         for (ProductModel shirt : allTshirts) {
-                            int rating  = Integer.parseInt(shirt.getRating());
+                            int rating = Integer.parseInt(shirt.getRating());
 
-                                if (rating>=4){
-                                    ratedItems.add(shirt);
-                                }
+                            if (rating >= 4) {
+                                ratedItems.add(shirt);
+                            }
 
                         }
 
@@ -138,7 +145,7 @@ if(user!=null) {
             String subTotal = sharedPreferences.getString("cartPrice", "0");
             subtotalView.setText("Rs." + subTotal);
 
-            int grandTotal = Integer.parseInt(subTotal) + 150;
+            grandTotal = Integer.parseInt(subTotal) + 150;
 
             totalView.setText("Rs." + Integer.toString(grandTotal));
         }
@@ -148,12 +155,27 @@ if(user!=null) {
         event.setOnClickListener(this);
         fandom.setOnClickListener(this);
 
-       return view;
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipe_refresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Fragment frg;
+                frg = getActivity().getSupportFragmentManager().findFragmentByTag("cart_fragment");
+                final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.detach(frg);
+                ft.attach(frg);
+                ft.commit();
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+
+        return view;
     }
+
     private void initRecyclerView() {
         RecyclerViewAdapter adpt = new RecyclerViewAdapter(ratedItems, getActivity());
         high_rated.setAdapter(adpt);
-        Log.d(TAG, "initRecyclerView: "+ ratedItems.toString());
+        Log.d(TAG, "initRecyclerView: " + ratedItems.toString());
         if (viewCart() != null) {
             CartAdapter cartAdpt = new CartAdapter(viewCart(), getActivity());
             recyclerView.setAdapter(cartAdpt);
@@ -169,16 +191,31 @@ if(user!=null) {
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user !=null ){
+                if (user != null) {
+                    final Dialog dialogBox = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar);
+                    dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
+                    dialogBox.setContentView(R.layout.checkout_dialogue);
+                    dialogBox.setCancelable(true);
+                    dialogBox.setCanceledOnTouchOutside(true); // todo
+                    TextView totalPrice = dialogBox.findViewById(R.id.total_price);
+                    totalPrice.setText("Rs." + grandTotal);
+                    dialogBox.show();
 
-                    checkout();
-                }else {
+                    Button confirm = dialogBox.findViewById(R.id.confirm_checkout);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            checkout();
+                            dialogBox.dismiss();
+                        }
+                    });
+
+                } else {
                     Toast.makeText(getActivity(), "Please Sign In to  Checkout", Toast.LENGTH_SHORT).show();
                 }
-               
+
             }
         });
-
 
 
         high_rated.setLayoutManager(new GridLayoutManager(getActivity(), 2) {
@@ -193,10 +230,9 @@ if(user!=null) {
     }
 
 
-
     private void checkout() {
 
-        for(OrderModel om: viewCart()){
+        for (OrderModel om : viewCart()) {
             try {
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -211,7 +247,7 @@ if(user!=null) {
                 mDatabase.child("Orders").child(key).child("street").setValue(street);
                 mDatabase.child("Orders").child(key).child("phone").setValue(phone);
 
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
@@ -271,4 +307,5 @@ if(user!=null) {
     public void deleteFromCart(View view) {
         //TODO
     }
+
 }

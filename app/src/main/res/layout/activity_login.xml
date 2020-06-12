@@ -120,12 +120,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bottom_red"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+
+        android:onClick="register_page"
         android:text="@string/register_label"
         android:textSize="25sp"
-        android:layout_marginTop="-40dp"
-        android:layout_marginStart="330dp"
-        android:onClick="register_page"
 
         />
 </RelativeLayout>

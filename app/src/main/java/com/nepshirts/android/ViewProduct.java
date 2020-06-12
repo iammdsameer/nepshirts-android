@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nepshirts.android.models.OrderModel;
 import com.nepshirts.android.models.ProductModel;
+import com.nepshirts.android.user.LoginActivity;
 import com.r0adkll.slidr.Slidr;
 import com.squareup.picasso.Picasso;
 
@@ -168,7 +169,10 @@ public class ViewProduct extends AppCompatActivity {
                                 checkout(productId, productColor, productSize, productQuantity);
                                 dialogBox.dismiss();
                             } else {
+                                Intent intent = new Intent(ViewProduct.this, LoginActivity.class);
                                 Toast.makeText(ViewProduct.this, "Please Sign In to  Checkout", Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
+                                ViewProduct.this.finish();
                             }
                         } else {
                             Toast.makeText(ViewProduct.this, "Invalid Quantity", Toast.LENGTH_SHORT).show();
@@ -218,7 +222,10 @@ public class ViewProduct extends AppCompatActivity {
             }
 
         } else {
-            Toast.makeText(ViewProduct.this, "Login to add products to cart!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ViewProduct.this, LoginActivity.class);
+            Toast.makeText(ViewProduct.this, "Please login to add products to cart.", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            ViewProduct.this.finish();
         }
 
     }

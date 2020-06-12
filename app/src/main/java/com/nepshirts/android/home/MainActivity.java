@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView profileIcon;
     private FirebaseAuth.AuthStateListener mauthAuthStateListener;
     private FirebaseUser user;
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,27 +97,39 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                    Fragment currentFragment=null;
+                    Fragment currentFragment;
 
                     switch (menuItem.getItemId()){
                         case R.id.home_id:
                             currentFragment= new HomeFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
                             break;
 
                         case R.id.search_id:
                             currentFragment= new SearchFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment, "search_fragment").commit();
                             break;
 
                         case R.id.cart_id:
                             currentFragment= new CartFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment, "cart_fragment").commit();
                             break;
                     }
 
-                    //for displaying frag
-                    getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
                     return true;
                 }
             };
 
+    @Override
+    public void onBackPressed() {
 
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel();
+            super.onBackPressed();
+        } else {
+            backToast = Toast.makeText(getBaseContext(), "Press back again to exit.", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 }

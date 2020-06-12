@@ -31,7 +31,9 @@
         <activity
             android:name=".ViewProduct"
             android:theme="@style/AppTheme.Slidr" />
-        <activity android:name=".home.MainActivity" />
+        <activity
+            android:name=".home.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".utils.SplashScreen">
@@ -41,7 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SingleCategory" />
 
         <meta-data
             android:name="preloaded_fonts"
