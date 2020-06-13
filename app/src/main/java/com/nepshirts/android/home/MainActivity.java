@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        if (getSupportActionBar()!=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             getSupportActionBar().setCustomView(R.layout.main_toolbar);
         }
@@ -55,36 +55,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewProfile() {
 
-                if (user == null) {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+        if (user == null) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
 
-                }else{
-                    ProfileFragment profile = new ProfileFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.shimmer_frame_id, profile);
-                    ;
-                    transaction.commit();
-                    bottomNavigation.setVisibility(View.GONE);
-                }
+        } else {
+            ProfileFragment profile = new ProfileFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.shimmer_frame_id, profile);
+            ;
+            transaction.commit();
+            bottomNavigation.setVisibility(View.GONE);
+        }
 
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this, "Paused", Toast.LENGTH_LONG).show();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-
-    private void init(){
+    private void init() {
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.shimmer_frame_id, homeFragment, "home_fragment");
@@ -99,19 +88,20 @@ public class MainActivity extends AppCompatActivity {
 
                     Fragment currentFragment;
 
-                    switch (menuItem.getItemId()){
+                    switch (menuItem.getItemId()) {
                         case R.id.home_id:
-                            currentFragment= new HomeFragment();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment).commit();
+                            currentFragment = new HomeFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment, "home_fragment").commit();
                             break;
 
                         case R.id.search_id:
-                            currentFragment= new SearchFragment();
+                            currentFragment = new SearchFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment, "search_fragment").commit();
+
                             break;
 
                         case R.id.cart_id:
-                            currentFragment= new CartFragment();
+                            currentFragment = new CartFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, currentFragment, "cart_fragment").commit();
                             break;
                     }
@@ -122,14 +112,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.shimmer_frame_id);
+        if (fragment instanceof HomeFragment) {
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                backToast.cancel();
+                super.onBackPressed();
+            } else {
+                backToast = Toast.makeText(getBaseContext(), "Press back again to exit.", Toast.LENGTH_SHORT);
+                backToast.show();
+            }
+            backPressedTime = System.currentTimeMillis();
 
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            backToast.cancel();
-            super.onBackPressed();
         } else {
-            backToast = Toast.makeText(getBaseContext(), "Press back again to exit.", Toast.LENGTH_SHORT);
-            backToast.show();
+            HomeFragment newFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.shimmer_frame_id, newFragment, "home_fragment").commit();
+            bottomNavigation.setSelectedItemId(R.id.home_id);
         }
-        backPressedTime = System.currentTimeMillis();
     }
+
+
 }

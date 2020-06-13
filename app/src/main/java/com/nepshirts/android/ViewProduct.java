@@ -1,5 +1,6 @@
 package com.nepshirts.android;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -12,11 +13,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -109,13 +116,15 @@ public class ViewProduct extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialogBox = new Dialog(ViewProduct.this, android.R.style.Theme_Black_NoTitleBar);
-                dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-                dialogBox.setContentView(R.layout.confirm_dialogue);
-                dialogBox.setCancelable(true);
-                dialogBox.setCanceledOnTouchOutside(true); // todo
-                dialogBox.show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProduct.this);
+                LayoutInflater inflater = getLayoutInflater();
+                builder.setView(inflater.inflate(R.layout.confirm_dialogue, null));
+                builder.setCancelable(true);
 
+                final AlertDialog dialogBox = builder.create();
+
+                dialogBox.show();
+                dialogBox.getWindow().setLayout(825, 550);
                 colorSpinner = dialogBox.findViewById(R.id.color_spinner);
                 sizeSpinner = dialogBox.findViewById(R.id.size_spinner);
                 quantityField = dialogBox.findViewById(R.id.product_quantity);

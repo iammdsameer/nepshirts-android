@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,10 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.nepshirts.android.R;
 import com.nepshirts.android.home.MainActivity;
 import com.nepshirts.android.models.UserModel;
+import com.nepshirts.android.utils.ProgressDialog;
 
 
 public class LoginActivity extends AppCompatActivity {
     private EditText email, password;
+    private TextView forgotPassword;
     private Button login;
     private SignInButton g_btn;
     private GoogleSignInClient client;
@@ -54,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (firebaseAuth.getCurrentUser() != null) {
 
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
 
             }
@@ -71,8 +75,17 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email_input);
         password = findViewById(R.id.password_input);
         login = findViewById(R.id.login_btn);
+        forgotPassword = findViewById(R.id.forget_password);
         g_btn = findViewById(R.id.google_sign_in);
         mAuth = FirebaseAuth.getInstance();
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPassword.class);
+                startActivity(intent);
+            }
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -85,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.google_sign_in:
+                        ProgressDialog.start(LoginActivity.this);
                         signIn();
                         break;
                 }
@@ -122,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void signIn() {
         Intent signInIntent = client.getSignInIntent();
@@ -200,7 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
 
-
+                            ProgressDialog.stop();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.

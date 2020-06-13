@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -192,14 +193,18 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 if (user != null) {
-                    final Dialog dialogBox = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar);
-                    dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-                    dialogBox.setContentView(R.layout.checkout_dialogue);
-                    dialogBox.setCancelable(true);
-                    dialogBox.setCanceledOnTouchOutside(true); // todo
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = getLayoutInflater();
+                    builder.setView(inflater.inflate(R.layout.checkout_dialogue, null));
+                    builder.setCancelable(true);
+
+                    final AlertDialog dialogBox = builder.create();
+                    dialogBox.show();
+                    dialogBox.getWindow().setLayout(820, 520);
+//                    dialogBox.setCanceledOnTouchOutside(true);  todo
                     TextView totalPrice = dialogBox.findViewById(R.id.total_price);
                     totalPrice.setText("Rs." + grandTotal);
-                    dialogBox.show();
+
 
                     Button confirm = dialogBox.findViewById(R.id.confirm_checkout);
                     confirm.setOnClickListener(new View.OnClickListener() {
