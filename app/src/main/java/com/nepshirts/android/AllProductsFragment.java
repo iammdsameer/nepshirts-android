@@ -41,7 +41,7 @@ public class AllProductsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_fragment, container, false);
+        View view = inflater.inflate(R.layout.category_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
         recyclerView = view.findViewById(R.id.recycler_view);

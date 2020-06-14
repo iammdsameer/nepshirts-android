@@ -29,6 +29,8 @@ import com.nepshirts.android.R;
 import com.nepshirts.android.RecyclerViewAdapter;
 import com.nepshirts.android.models.ProductModel;
 import com.nepshirts.android.models.SliderModel;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -78,6 +80,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         images.add(new SliderModel(R.drawable.header5));
 
         sliderView.setSliderAdapter(new ImageSliderAdapter(getActivity(), images));
+        sliderView.setScrollTimeInSec(2);
+        sliderView.startAutoCycle();
 
         viewMore.setOnClickListener(this);
         humour.setOnClickListener(this);
@@ -92,6 +96,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
+
         shimmerFrameLayout = getActivity().findViewById(R.id.shimmer_frame_id);
         shimmerFrameLayout.startShimmer();
         super.onStart();
@@ -119,8 +124,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         for (ProductModel shirt : tshirts) {
                             int rating  = Integer.parseInt(shirt.getRating());
 
-                            if (rating>=4){
-                                ratedItems.add(shirt);
+                            if (rating >= 4) {
+                                if (ratedItems.size() < 6) {
+                                    ratedItems.add(shirt);
+                                }
                             }
 
                         }

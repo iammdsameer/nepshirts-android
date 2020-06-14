@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             getSupportActionBar().setCustomView(R.layout.main_toolbar);
@@ -64,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
             ProfileFragment profile = new ProfileFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.shimmer_frame_id, profile);
-            ;
             transaction.commit();
-            bottomNavigation.setVisibility(View.GONE);
         }
 
 
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.shimmer_frame_id, homeFragment, "home_fragment");
         //back stack
         transaction.commit();
+
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navListner =

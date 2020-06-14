@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast toast=Toast.makeText(LoginActivity.this,"Email or Password Wrong!",Toast.LENGTH_LONG);
                             View view =toast.getView();
-                            view.setBackgroundColor(Color.RED);
+                            view.setBackgroundColor(Color.parseColor("#ff2828c9"));
                             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                             toastMessage.setTextColor(Color.WHITE);
                             toast.show();
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast toast=Toast.makeText(LoginActivity.this,"Login Successful!!",Toast.LENGTH_LONG);
                             View view =toast.getView();
-                            view.setBackgroundColor(Color.GREEN);
+                            view.setBackgroundColor(Color.parseColor("#28ff378f"));
                             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                             toastMessage.setTextColor(Color.WHITE);
                             toast.show();
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                             // cusom Toast
                             Toast toast=Toast.makeText(LoginActivity.this,"Login Successful!!",Toast.LENGTH_LONG);
                             View view =toast.getView();
-                            view.setBackgroundColor(Color.GREEN);
+                            view.setBackgroundColor(Color.parseColor("#28ff378f"));
                             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                             toastMessage.setTextColor(Color.WHITE);
                             toast.show();

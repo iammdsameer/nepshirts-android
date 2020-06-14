@@ -67,13 +67,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.cartViewHolder
                             holder.quantity.setText("Quantity: " + list.get(i).getQuantity());
                             Picasso.get().load(dataSnapshot.child("imageUrl").getValue().toString()).into(holder.productImage);
                         } catch (NullPointerException e) {
-                            Toast.makeText(mContext, "Madarchod", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Something went wrong.", Toast.LENGTH_SHORT).show();
                         }
                         if (list.get(i).getColor().toLowerCase().equals("white")) {
-                            holder.productColor.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            holder.productColor.setText("White");
+                            holder.productColor.setTextColor(Color.parseColor("#FFFFFF"));
 
                         } else {
-                            holder.productColor.setBackgroundColor(Color.parseColor("#000000"));
+                            holder.productColor.setText("Black");
                         }
 
                         price = Integer.parseInt(dataSnapshot.child("disPrice").getValue().toString());
@@ -110,7 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.cartViewHolder
         ImageView productImage;
         TextView category, title, price, quantity, size;
         CardView parentLayout;
-        RadioButton productColor;
+        TextView productColor;
 
         public cartViewHolder(@NonNull View view) {
             super(view);

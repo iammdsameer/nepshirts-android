@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nepshirts.android.home.MainActivity;
 import com.nepshirts.android.user.LoginActivity;
 import com.squareup.picasso.Picasso;
 
@@ -78,14 +80,14 @@ public class CheckOut extends AppCompatActivity {
                        String _CITY = dataSnapshot.child("city").getValue().toString();
                         String  _STREET = dataSnapshot.child("street").getValue().toString();
                         String  _NAME = dataSnapshot.child("fullName").getValue().toString();
-                        shippingAddress.setText("Shipping Address " +_STREET +" "+ _CITY );
-                        userName.setText("The delivery will be taken by "+_NAME);
-                        delivery_date.setText("Expected Delivery Date: "+ shippingDate.toString());
+                        shippingAddress.setText(_STREET + ", " + _CITY);
+                        userName.setText(_NAME);
+                        delivery_date.setText("Delivery Date: " + shippingDate.toString());
 
 
                         SharedPreferences sharedPreferences = CheckOut.this.getSharedPreferences("priceInfo", Context.MODE_PRIVATE);
                         String subTotal = sharedPreferences.getString("cartPrice", "0");
-                        totalAmount.setText("Total Payable Price: " + subTotal);
+                        totalAmount.setText("Total Price: " + subTotal);
 
 
                     } catch (NullPointerException e) {
@@ -134,6 +136,14 @@ public class CheckOut extends AppCompatActivity {
         CheckOut.this.getSharedPreferences("priceInfo", 0).edit().clear().apply();
         CheckOut.this.getSharedPreferences("cartInfo", 0).edit().clear().apply();
 
+    }
+
+    public void redirect(View view) {
+        Intent intent = new Intent(CheckOut.this, MainActivity.class);
+        CheckOut.this.getSharedPreferences("priceInfo", 0).edit().clear().apply();
+        CheckOut.this.getSharedPreferences("cartInfo", 0).edit().clear().apply();
+        startActivity(intent);
+        finish();
     }
 }
 

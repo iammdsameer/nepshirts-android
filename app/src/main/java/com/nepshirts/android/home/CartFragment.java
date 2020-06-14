@@ -62,6 +62,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private String name, city, street, phone;
     private CardView calculationCard;
     private TextView cartFragmetTitle;
+    private ImageView emptyCart;
 
     private int grandTotal;
 
@@ -72,7 +73,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.cart_fragment, container, false);
 
-        textView = view.findViewById(R.id.test);
         recyclerView = view.findViewById(R.id.cart_items);
         high_rated = view.findViewById(R.id.high_rated_items);
         checkout_button = view.findViewById(R.id.check_out_button);
@@ -83,6 +83,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         user = FirebaseAuth.getInstance().getCurrentUser();
         calculationCard = view.findViewById(R.id.calculation_card);
         cartFragmetTitle = view.findViewById(R.id.cart_fragment_title);
+        emptyCart = view.findViewById(R.id.empty_cart);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         if (user != null) {
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
@@ -119,7 +120,9 @@ public class CartFragment extends Fragment implements View.OnClickListener {
                             int rating = Integer.parseInt(shirt.getRating());
 
                             if (rating >= 4) {
-                                ratedItems.add(shirt);
+                                if (ratedItems.size() < 6) {
+                                    ratedItems.add(shirt);
+                                }
                             }
 
                         }
@@ -184,17 +187,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             calculationCard.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             checkout_button.setVisibility(View.GONE);
-            cartFragmetTitle.setText("YOUR CART IS EMPTY");
-            cartFragmetTitle.setTextColor(Color.parseColor("#FFCC00"));
-            cartFragmetTitle.setTextSize(20);
+            emptyCart.setVisibility(View.VISIBLE);
            // Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
 
-            Toast toast=Toast.makeText(getActivity(),"Your Cart is Empty!!",Toast.LENGTH_LONG);
-            View view =toast.getView();
-            view.setBackgroundColor(Color.RED);
-            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-            toastMessage.setTextColor(Color.WHITE);
-            toast.show();
+            Toast.makeText(getActivity(), "Your Cart is Empty!!", Toast.LENGTH_SHORT).show();
 
         }
         checkout_button.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +262,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         }
 
         Toast.makeText(getActivity(), "Done", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), CheckOut.class));
+        Intent intent = new Intent(getActivity(), CheckOut.class);
+        startActivity(intent);
+        getActivity().finish();
+
     }
 
     @Override

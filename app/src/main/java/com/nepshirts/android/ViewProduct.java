@@ -109,7 +109,7 @@ public class ViewProduct extends AppCompatActivity {
         shirtDiscounted.setText(discounted);
         shirtDiscounted.setPaintFlags(shirtDiscounted.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         shirtCategory.setText(category);
-        shirtDetails.setText(description);
+        shirtDetails.setText("\u2022" + description);
         shirtRating.setRating(rating);
 
 

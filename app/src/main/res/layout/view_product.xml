@@ -50,8 +50,8 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shirt_image"
@@ -190,6 +190,8 @@
                 android:id="@+id/product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="4dp"
                 android:fontFamily="monospace"
                 android:text="⚫Linus, linus linus 100 rupya 100 rupya\n⚫Linus, linus linus 100 rupya 100 rupya"
                 android:textSize="15sp" />
@@ -197,9 +199,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
-                android:text="100% Cotton" />
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="6dp"
+                android:textSize="15sp"
+                android:text="\u2022 100% Cotton\n\n\u2022 Multiple Sizes and Colors" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -207,6 +210,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/blue"
                 android:textSize="15sp"
+                android:layout_gravity="center"
                 android:text="#MadeInNepal" />
         </LinearLayout>
 

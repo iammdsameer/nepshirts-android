@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.nepshirts.android.R;
 import com.nepshirts.android.home.MainActivity;
 import com.nepshirts.android.models.UserModel;
+import com.nepshirts.android.utils.ProgressDialog;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -94,18 +95,22 @@ public class RegisterActivity extends AppCompatActivity {
         }else if(password.isEmpty()) {
             userPassword.setError("required!");
             userPassword.requestFocus();
+        } else if (!password.equals(confirmPass)) {
+            userPassword.setError("Passwords didn't match");
+            userPassword.requestFocus();
+        } else if (password.length() < 6) {
+            userPassword.setError("Must be at least 6 characters");
+            userPassword.requestFocus();
         }
-//        }else if(password != confirmPass ) {
-//            userPassword.setError("Passwords did'nt match");
-//        }
         else{
 
-
+            ProgressDialog.start(RegisterActivity.this);
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if(task.isSuccessful()){
+                        ProgressDialog.stop();
                         Toast.makeText(RegisterActivity.this, "Firebase User Created", Toast.LENGTH_SHORT).show();
                         String city = "Update city";
                         String street = "update street";
@@ -119,14 +124,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Toast toast=Toast.makeText(RegisterActivity.this,"Success!!",Toast.LENGTH_LONG);
                                     View view =toast.getView();
-                                    view.setBackgroundColor(Color.GREEN);
+                                    view.setBackgroundColor(Color.parseColor("#28ff378f")); //green
                                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                                     toastMessage.setTextColor(Color.WHITE);
                                     toast.show();
                                 }else{
                                     Toast toast=Toast.makeText(RegisterActivity.this,"Something Went Wrong!",Toast.LENGTH_LONG);
                                     View view =toast.getView();
-                                    view.setBackgroundColor(Color.RED);
+                                    view.setBackgroundColor(Color.parseColor("#ff2828cc")); //red
                                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                                     toastMessage.setTextColor(Color.WHITE);
                                     toast.show();
@@ -137,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                         ;
 
                     }else{
-                        Toast.makeText(RegisterActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "User with this email already exists.", Toast.LENGTH_SHORT).show();
                     }
 
                 }

@@ -44,7 +44,7 @@ public class CategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_fragment, container, false);
+        View view = inflater.inflate(R.layout.category_fragment, container, false);
         Log.d(TAG, "onCreateView: started");
 
         headerImage = view.findViewById(R.id.category_header_image);
@@ -107,7 +107,12 @@ public class CategoryFragment extends Fragment {
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(filteredList, getActivity());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
     }
 }
