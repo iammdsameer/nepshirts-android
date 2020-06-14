@@ -278,7 +278,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
             case R.id.category_event:
                 currentFragment = new CategoryFragment();
-                args.putString("category", "event");
+                args.putString("category", "patriotic");
                 currentFragment.setArguments(args);
                 break;
 
