@@ -185,9 +185,15 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("ERROR: ", "signInWithCredential:success");
-
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Login Success!!", Toast.LENGTH_SHORT).show();
+
+                            // cusom Toast
+                            Toast toast=Toast.makeText(LoginActivity.this,"Login Successful!!",Toast.LENGTH_LONG);
+                            View view =toast.getView();
+                            view.setBackgroundColor(Color.GREEN);
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.WHITE);
+                            toast.show();
 
                             //storing user information in firebase database
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());

@@ -128,6 +128,13 @@ public class CheckOut extends AppCompatActivity {
         CheckOut.this.getSharedPreferences("cartInfo", 0).edit().clear().apply();
 
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        CheckOut.this.getSharedPreferences("priceInfo", 0).edit().clear().apply();
+        CheckOut.this.getSharedPreferences("cartInfo", 0).edit().clear().apply();
+
+    }
 }
 
 
