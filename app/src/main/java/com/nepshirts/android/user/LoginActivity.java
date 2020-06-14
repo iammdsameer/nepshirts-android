@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -124,10 +125,21 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Email or password is wrong!!!", Toast.LENGTH_SHORT).show();
+                            Toast toast=Toast.makeText(LoginActivity.this,"Email or Password Wrong!",Toast.LENGTH_LONG);
+                            View view =toast.getView();
+                            view.setBackgroundColor(Color.RED);
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.WHITE);
+                            toast.show();
+                            email.requestFocus();
                         } else {
 
-                            Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                            Toast toast=Toast.makeText(LoginActivity.this,"Login Successful!!",Toast.LENGTH_LONG);
+                            View view =toast.getView();
+                            view.setBackgroundColor(Color.GREEN);
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.WHITE);
+                            toast.show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                     }

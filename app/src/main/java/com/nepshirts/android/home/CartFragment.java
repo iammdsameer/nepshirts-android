@@ -187,7 +187,15 @@ public class CartFragment extends Fragment implements View.OnClickListener {
             cartFragmetTitle.setText("YOUR CART IS EMPTY");
             cartFragmetTitle.setTextColor(Color.parseColor("#FFCC00"));
             cartFragmetTitle.setTextSize(20);
-            Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "Your Cart is empty!", Toast.LENGTH_SHORT).show();
+
+            Toast toast=Toast.makeText(getActivity(),"Your Cart is Empty!!",Toast.LENGTH_LONG);
+            View view =toast.getView();
+            view.setBackgroundColor(Color.RED);
+            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastMessage.setTextColor(Color.WHITE);
+            toast.show();
+
         }
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
